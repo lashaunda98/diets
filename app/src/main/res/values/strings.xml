@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Diets</string>
+
+    <string name="weights">Pesos</string>
+    <string name="title_activity_weights">WeightsActivity</string>
+
+    <string name="add_weight">Añadir peso</string>
+</resources>
