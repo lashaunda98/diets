@@ -6,12 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
+import es.victorgf87.diets.classes.ExerciseActivity;
+import es.victorgf87.diets.storers.StorerFactory;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        List<ExerciseActivity> activities= StorerFactory.create(this).getActivitiesList();
+        int a=3;
+        int b=a;
     }
 
     @Override

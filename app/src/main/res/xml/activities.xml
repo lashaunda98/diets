@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE activities [
+    <!ELEMENT activities (activity)*>
+    <!ELEMENT activity (#PCDATA)>
+    <!ATTLIST activity
+        loss CDATA #REQUIRED
+        name CDATA #REQUIRED>
+    ]>
+<activities>
+    <activity name="acostado" loss="114"/>
+    <activity name="Actividades de pie: bailar" loss="304"/>
+    <activity name="Actividades de pie: cantar" loss="304"/>
+    <activity name="Actividades de pie: lavar ropa" loss="209"/>
+    <activity name="Actividades recreativas: ligeras" loss="380"/>
+    <activity name="Actividades recreativas: moderadas" loss="475"/>
+    <activity name="Actividades recreativas: pesadas" loss="665"/>
+    <activity name="Actividades recreativas: sedentarias" loss="209"/>
+    <activity name="Actividades sentado: jugar cartas" loss="133"/>
+    <activity name="Baloncesto" loss="809"/>
+    <activity name="Bicicleta estática: ejercicio alto" loss="899"/>
+    <activity name="Bicicleta estática: ejercicio moderado" loss="707"/>
+    <activity name="Caminar a paso lento una hora" loss="454"/>
+    <activity name="Caminar a paso rápido una hora" loss="505"/>
+    <activity name="Comer" loss="142"/>
+    <activity name="Conducir coche" loss="199"/>
+    <activity name="Correr" loss="836"/>
+    <activity name="De pie, tranquilamente" loss="133"/>
+    <activity name="Dormir" loss="95"/>
+    <activity name="Escribir" loss="142"/>
+</activities>
