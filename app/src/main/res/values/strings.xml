@@ -5,4 +5,8 @@
     <string name="title_activity_weights">WeightsActivity</string>
 
     <string name="add_weight">Añadir peso</string>
+    <string name="title_activity_exercise">ExerciseActivityActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>
