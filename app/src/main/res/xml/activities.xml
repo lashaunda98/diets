@@ -27,4 +27,18 @@
     <activity name="De pie, tranquilamente" loss="133"/>
     <activity name="Dormir" loss="95"/>
     <activity name="Escribir" loss="142"/>
+    <activity name="Labores domésticas: barrer la casa" loss="285"/>
+    <activity name="Labores domésticas: cocinar" loss="171"/>
+    <activity name="Labores domésticas: lavar la ropa" loss="285"/>
+    <activity name="Labores domésticas: lavar vajilla" loss="161"/>
+    <activity name="Labores domésticas: limpiar la casa" loss="209"/>
+    <activity name="Labores domésticas: planchar" loss="133"/>
+    <activity name="Leer" loss="142"/>
+    <activity name="Montar en bici" loss="859"/>
+    <activity name="Nadar" loss="1061"/>
+    <activity name="Nadar. Ejercicio moderado" loss="606"/>
+    <activity name="Sentado, tranquilamente" loss="114"/>
+    <activity name="Trabajo de oficina: de pie y moviéndose" loss="152"/>
+    <activity name="Trabajo de oficina: sentado en escritorio" loss="123"/>
+    <activity name="Ver TV" loss="133"/>
 </activities>
