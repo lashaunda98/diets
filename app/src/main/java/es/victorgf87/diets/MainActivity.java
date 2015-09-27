@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity
         newNumber.add(count);
         dataList.add(newNumber);
 
+
+
         lineViewGlassesChart.setDrawDotLine(false); //optional
         lineViewGlassesChart.setShowPopup(LineView.SHOW_POPUPS_All); //optional
         lineViewGlassesChart.setBottomTextList(bottomTexts);
