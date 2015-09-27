@@ -20,6 +20,7 @@ import es.victorgf87.diets.R;
 import es.victorgf87.diets.classes.DrankWaterGlass;
 import es.victorgf87.diets.classes.ExerciseActivity;
 import es.victorgf87.diets.classes.WeightRegister;
+import es.victorgf87.diets.classes.recipes.Ingredient;
 
 /**
  * Created by Víctor on 26/09/2015.
@@ -32,6 +33,10 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
     private final static String WEIGHT_REGISTERS_TABLE_NAME="WEIGHTREGISTERS";
     private final static String ACTIVITIES_TABLE_NAME="ACTIVITIES";
     private final static String GLASSES_TABLE_NAME="DRANKWATERGLASSES";
+    private final static String INGREDIENTS_TABLE_NAME="INGREDIENTS";
+    private final static String RECIPES_TABLE_NAME="RECIPES";
+    private final static String RECIPES_INGREDIENTS_TABLE_NAME="RECIPESINGREDIENTS";
+
 
     @Override
     public void storeWeight(WeightRegister weight)
@@ -123,9 +128,51 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
                 "TIMESTAMP LONG);";
         db.execSQL(queryGlasses);
 
+        String queryIngredients="CREATE TABLE "+DBStorer.INGREDIENTS_TABLE_NAME+"(" +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "NAME TEXT UNIQUE," +
+                "WEIGHT INTEGER);";
+        db.execSQL(queryIngredients);
+
+        String queryRecipes="CREATE TABLE "+DBStorer.RECIPES_TABLE_NAME+"(" +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "NAME TEXT UNIQUE," +
+                "ELABORATION TEXT," +
+                "PEOPLE INTEGER);";
+        db.execSQL(queryRecipes);
+
+        String queryRecipesIngredients="CREATE TABLE "+DBStorer.RECIPES_INGREDIENTS_TABLE_NAME+"(" +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "ID1 INTEGER," +
+                "ID2 INTEGER," +
+                "FOREIGN KEY(ID1) REFERENCES "+DBStorer.RECIPES_INGREDIENTS_TABLE_NAME+"(ID)," +
+                "FOREIGN KEY(ID2) REFERENCES "+DBStorer.INGREDIENTS_TABLE_NAME+"(ID));";
+        db.execSQL(queryRecipesIngredients);
+
+        try
+        {
+            List<Ingredient> ingredients=readIngredients();
+            for(Ingredient ing: ingredients)
+            {
+                ContentValues values=new ContentValues();
+                values.put("ID",ing.getId());
+                values.put("NAME",ing.getName());
+                values.put("WEIGHT",ing.getWeight());
+                db.insert(DBStorer.INGREDIENTS_TABLE_NAME, null, values);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
 
         try {
-            List<ExerciseActivity>activities= doRead();
+            List<ExerciseActivity>activities= readExerciseActivities();
             for(ExerciseActivity ea: activities)
             {
                 ContentValues cv=new ContentValues();
@@ -149,6 +196,33 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         int c=a;
 
 
+    }
+
+    @Override
+    public List<Ingredient> getAllIngredients()
+    {
+        SQLiteDatabase db=getReadableDatabase();
+
+        String query="select ID, NAME, WEIGHT from "+DBStorer.INGREDIENTS_TABLE_NAME;
+        Cursor cursor=db.rawQuery(query, null);
+
+        List<Ingredient> ret=new ArrayList<>();
+
+        if(cursor.moveToFirst())
+        {
+            while(!cursor.isAfterLast())
+            {
+                Integer id=cursor.getInt(0);
+                String name=cursor.getString(1);
+                Integer weight=cursor.getInt(2);
+                Ingredient newIngredient=new Ingredient(id,name,weight);
+                ret.add(newIngredient);
+                cursor.moveToNext();
+            }
+        }
+
+        if(db.isOpen())db.close();
+        return ret;
     }
 
     @Override
@@ -180,11 +254,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
     @Override
     public List<DrankWaterGlass> getAllGlasses()
     {
-        /*
-        String queryGlasses="CREATE TABLE "+DBStorer.GLASSES_TABLE_NAME+"(" +
-                "ID INTEGER PRIMAR KEY AUTOINCREMENT," +
-                "TIMESTAMP LONG);";
-         */
+
         List<DrankWaterGlass>ret=new ArrayList<>();
         String query="select id, timestamp from "+DBStorer.GLASSES_TABLE_NAME+";";
         SQLiteDatabase db=getReadableDatabase();
@@ -216,7 +286,50 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         db.insert(DBStorer.GLASSES_TABLE_NAME,null,cv);
     }
 
-    private List<ExerciseActivity> doRead()  throws IOException, XmlPullParserException
+    private List<Ingredient> readIngredients()throws IOException, XmlPullParserException
+    {
+        // Create ResourceParser for XML file
+        //XmlResourceParser xpp = context.getResources().getXml(R.xml.activities);
+        List<Ingredient> ret=new ArrayList<>();
+
+
+        XmlResourceParser pars= context.getResources().getXml(R.xml.ingredients);
+
+
+        int eventType=pars.getEventType();
+        String currentName=null;
+        Integer currentWeight=null;
+        String parsed=null;
+        Integer currentId=null;
+        while(eventType!=XmlResourceParser.END_DOCUMENT)
+        {
+            try {
+                String nameGotten=pars.getName();
+                Log.d("DBStorer", "El nombre es "+nameGotten);
+                if(nameGotten!=null && nameGotten.equals("Ingredient"))
+                {
+                    currentId=Integer.valueOf(pars.getAttributeValue(null,"id"));
+                    currentName=pars.getAttributeValue(null, "name");
+                    currentWeight =Integer.parseInt(pars.getAttributeValue(null,"weight"));
+                    ret.add(new Ingredient(currentId,currentName,currentWeight));
+
+                }
+
+
+            }
+            catch(Exception e)
+            {
+
+            }
+            pars.next();
+            eventType=pars.getEventType();
+        }
+        int a=3;
+        int b=a;
+        return ret;
+    }
+
+    private List<ExerciseActivity> readExerciseActivities()  throws IOException, XmlPullParserException
     {
         // Create ResourceParser for XML file
         //XmlResourceParser xpp = context.getResources().getXml(R.xml.activities);
