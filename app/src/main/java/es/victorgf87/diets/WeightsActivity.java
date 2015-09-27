@@ -128,6 +128,8 @@ public class WeightsActivity extends AppCompatActivity
     private void paintLineChart()
     {
         List<WeightRegister> weightList=StorerFactory.create(this).getAllWeights();
+        if(weightList.size()==0)
+            return;
 
         ArrayList<ArrayList<Integer>>dataInts=new ArrayList<ArrayList<Integer>>();
         ArrayList<String>bottomStrings=new ArrayList<String>();

@@ -5,13 +5,43 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Date;
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import es.victorgf87.diets.classes.DrankWaterGlass;
+import es.victorgf87.diets.classes.ExerciseActivity;
+import es.victorgf87.diets.storers.StorerFactory;
+
+public class MainActivity extends AppCompatActivity
+{
+    @Bind(R.id.main_activity_btnAddGlass)Button btnAddGlass;
+
+    @OnClick(R.id.main_activity_btnAddGlass)
+    void addGlassClick()
+    {
+        Date date=new Date(System.currentTimeMillis());
+        DrankWaterGlass newGlass=new DrankWaterGlass(date);
+        StorerFactory.create(MainActivity.this).addDrankWaterGlass(newGlass);
+
+        List<DrankWaterGlass> glasses=StorerFactory.create(MainActivity.this).getAllGlasses();
+        int a=3;
+        int b=a;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        List<ExerciseActivity> activities= StorerFactory.create(this).getActivitiesList();
+        int a=3;
+        int b=a;
     }
 
     @Override
