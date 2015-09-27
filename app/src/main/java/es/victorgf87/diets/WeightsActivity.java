@@ -148,13 +148,6 @@ public class WeightsActivity extends AppCompatActivity
             bottomStrings.add(newstring);
         }
 
-        lineView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int a=3;
-                int b=a;
-            }
-        });
 
 
 

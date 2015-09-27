@@ -7,6 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.dacer.androidcharts.LineView;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -20,17 +24,69 @@ import es.victorgf87.diets.storers.StorerFactory;
 public class MainActivity extends AppCompatActivity
 {
     @Bind(R.id.main_activity_btnAddGlass)Button btnAddGlass;
+    @Bind(R.id.main_activity_glasses_linear_chart)LineView lineViewGlassesChart;
 
     @OnClick(R.id.main_activity_btnAddGlass)
     void addGlassClick()
     {
-        Date date=new Date(System.currentTimeMillis());
-        DrankWaterGlass newGlass=new DrankWaterGlass(date);
+        DrankWaterGlass newGlass=new DrankWaterGlass();
         StorerFactory.create(MainActivity.this).addDrankWaterGlass(newGlass);
 
-        List<DrankWaterGlass> glasses=StorerFactory.create(MainActivity.this).getAllGlasses();
-        int a=3;
-        int b=a;
+        paintGlassesChart();
+    }
+
+    private void paintGlassesChart()
+    {
+        List<DrankWaterGlass>glassesCollection=StorerFactory.create(MainActivity.this).getAllGlasses();
+        if(glassesCollection.size()==0)return;
+
+        ArrayList<String>bottomTexts=new ArrayList<>();
+        ArrayList<ArrayList<Integer>> dataList=new ArrayList<>();
+
+        String textBefore=getDayMonthString(glassesCollection.get(0).getDate());
+
+        int count=0;
+        for(DrankWaterGlass glass:glassesCollection)
+        {
+            String currentText=getDayMonthString(glass.getDate());
+            if(currentText.equals(textBefore))
+            {
+                count++;
+            }
+            else {
+                bottomTexts.add(textBefore);
+                ArrayList<Integer>newNumber=new ArrayList<>();
+                newNumber.add(count);
+                dataList.add(newNumber);
+                count=0;
+            }
+            textBefore=currentText;
+        }
+
+        bottomTexts.add(textBefore);
+        ArrayList<Integer>newNumber=new ArrayList<>();
+        newNumber.add(count);
+        dataList.add(newNumber);
+
+        lineViewGlassesChart.setDrawDotLine(false); //optional
+        lineViewGlassesChart.setShowPopup(LineView.SHOW_POPUPS_All); //optional
+        lineViewGlassesChart.setBottomTextList(bottomTexts);
+        lineViewGlassesChart.setDataList(dataList);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        paintGlassesChart();
+    }
+
+    private String getDayMonthString(Date date)
+    {
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(date);
+        String day=""+calendar.get(Calendar.DAY_OF_MONTH);
+        String month=""+(calendar.get(Calendar.MONTH)+1);
+        return day+"/"+month;
     }
 
     @Override

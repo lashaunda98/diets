@@ -12,7 +12,8 @@ public class DrankWaterGlass
 
     public DrankWaterGlass()
     {
-        this.date=new Date(System.currentTimeMillis());
+        Date date=new Date(System.currentTimeMillis());
+        this.date=date;
     }
 
     public DrankWaterGlass(Integer id, Date date) {

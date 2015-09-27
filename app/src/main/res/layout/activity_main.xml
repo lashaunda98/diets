@@ -17,4 +17,15 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <HorizontalScrollView
+        android:layout_below="@id/main_activity_btnAddGlass"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp">
+        <view
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            class="com.dacer.androidcharts.LineView"
+            android:id="@+id/main_activity_glasses_linear_chart" />
+    </HorizontalScrollView>
 </RelativeLayout>

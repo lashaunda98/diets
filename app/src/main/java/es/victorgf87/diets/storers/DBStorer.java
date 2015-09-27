@@ -16,8 +16,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.parsers.SAXParserFactory;
-
 import es.victorgf87.diets.R;
 import es.victorgf87.diets.classes.DrankWaterGlass;
 import es.victorgf87.diets.classes.ExerciseActivity;
@@ -101,7 +99,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
     {
         String queryWeights="CREATE TABLE "+DBStorer.WEIGHT_REGISTERS_TABLE_NAME+
                 "(ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "TIMESTAMP INTEGER," +
+                "TIMESTAMP LONG," +
                 "WEIGHT REAL);";
         db.execSQL(queryWeights);
         Log.d("DBStorer onCreate", "DB created successfully");
@@ -121,8 +119,8 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
          */
 
         String queryGlasses="CREATE TABLE "+DBStorer.GLASSES_TABLE_NAME+"(" +
-                "ID INTEGER PRIMAR KEY AUTOINCREMENT," +
-                "TIMESTAMP INTEGER);";
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "TIMESTAMP LONG);";
         db.execSQL(queryGlasses);
 
 
@@ -185,7 +183,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         /*
         String queryGlasses="CREATE TABLE "+DBStorer.GLASSES_TABLE_NAME+"(" +
                 "ID INTEGER PRIMAR KEY AUTOINCREMENT," +
-                "TIMESTAMP INTEGER);";
+                "TIMESTAMP LONG);";
          */
         List<DrankWaterGlass>ret=new ArrayList<>();
         String query="select id, timestamp from "+DBStorer.GLASSES_TABLE_NAME+";";
@@ -196,7 +194,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
             while(!cursor.isAfterLast())
             {
                 Integer id=cursor.getInt(0);
-                Integer timeStamp=cursor.getInt(1);
+                long timeStamp=cursor.getLong(1);
                 Date date=new Date(timeStamp);
                 DrankWaterGlass newGlass=new DrankWaterGlass(id,date);
                 ret.add(newGlass);
@@ -224,7 +222,6 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         //XmlResourceParser xpp = context.getResources().getXml(R.xml.activities);
         List<ExerciseActivity> ret=new ArrayList<>();
 
-        SAXParserFactory factory = SAXParserFactory.newInstance();
 
         XmlResourceParser pars= context.getResources().getXml(R.xml.activities);
 
