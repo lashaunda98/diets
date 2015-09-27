@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
 
     private void paintGlassesChart()
     {
-        
+
         List<DrankWaterGlass>glassesCollection=StorerFactory.create(MainActivity.this).getAllGlasses();
         if(glassesCollection.size()==0)return;
 

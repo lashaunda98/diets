@@ -21,6 +21,7 @@ import es.victorgf87.diets.classes.DrankWaterGlass;
 import es.victorgf87.diets.classes.ExerciseActivity;
 import es.victorgf87.diets.classes.WeightRegister;
 import es.victorgf87.diets.classes.recipes.Ingredient;
+import es.victorgf87.diets.classes.recipes.Recipe;
 
 /**
  * Created by Víctor on 26/09/2015.
@@ -149,6 +150,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
                 "FOREIGN KEY(ID2) REFERENCES "+DBStorer.INGREDIENTS_TABLE_NAME+"(ID));";
         db.execSQL(queryRecipesIngredients);
 
+
         try
         {
             List<Ingredient> ingredients=readIngredients();
@@ -169,6 +171,18 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         {
             e.printStackTrace();
         }
+
+        try {
+            List<Recipe>recipes=readRecipes(db);
+            int a=3;
+            int b=a;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+
+
 
 
         try {
@@ -284,6 +298,86 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         cv.put("timestamp",glass.getDateTimeStamp());
 
         db.insert(DBStorer.GLASSES_TABLE_NAME,null,cv);
+    }
+
+
+    private List<Recipe>readRecipes(SQLiteDatabase db) throws IOException, XmlPullParserException
+    {
+        List<Recipe>ret=new ArrayList<>();
+        XmlResourceParser pars= context.getResources().getXml(R.xml.recipes);
+        int eventType=pars.getEventType();
+        Integer currentId=null;
+        String currentName=null;
+        Integer currentPeople=null;
+        String currentElaboration=null;
+        String parsed=null;
+
+
+
+        while(eventType!=XmlResourceParser.END_DOCUMENT)
+        {
+            try {
+                String nameGotten=pars.getName();
+                Log.d("DBStorer", "El nombre es "+nameGotten);
+                if(nameGotten!=null && nameGotten.equals("Recipe"))
+                {
+                    currentId=Integer.valueOf(pars.getAttributeValue(null, "id"));
+                    currentName=pars.getAttributeValue(null, "name");
+                    currentPeople =Integer.parseInt(pars.getAttributeValue(null, "people"));
+                    currentElaboration=pars.getAttributeValue(null,"elaboration");
+                    Recipe newRecipe=new Recipe(currentElaboration,currentId,currentName,currentPeople);
+
+                    pars.next();
+                    nameGotten=pars.getName();
+                    while(nameGotten.equals("Ingredient"))
+                    {
+                        try {
+                            Integer currentIngredientId = Integer.parseInt(pars.getAttributeValue(null, "id"));
+                            Ingredient currentIngredient = getIngredientById(currentIngredientId, db);
+                            newRecipe.addIngredient(currentIngredient);
+
+                            int a = 3;
+                            int b = a;
+                        }
+                        catch(Exception e)
+                        {
+                            e.printStackTrace();
+                            int a=3;
+                            int b=a;
+                        }
+                        pars.next();
+                        nameGotten = pars.getName();
+                    }
+                    ret.add(newRecipe);
+
+                }
+
+
+            }
+            catch(Exception e)
+            {
+
+            }
+            pars.next();
+            eventType=pars.getEventType();
+        }
+        int a=3;
+        int b=a;
+        return ret;
+    }
+
+    private Ingredient getIngredientById(Integer id, SQLiteDatabase db)
+    {
+        String[] selection=new String[]{""+id};
+        String query="select ID, NAME, WEIGHT from "+DBStorer.INGREDIENTS_TABLE_NAME+" where ID=?";
+        Cursor cursor=db.rawQuery(query,selection);
+        if(cursor.moveToFirst())
+        {
+            String name=cursor.getString(1);
+            Integer weight=cursor.getInt(2);
+            return new Ingredient(id,name,weight);
+        }
+        return null;
     }
 
     private List<Ingredient> readIngredients()throws IOException, XmlPullParserException
