@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Recipes>
+    <Recipe id="1" name="Alubias con chorizo" people="4" elaboration="Se ponen las alubias a remojo la noche anterior. Al día siguiente se ponen los 3 vasos de agua
+         en la olla y se añaden las alubias y el resto de los ingredientes troceados. Se tapa la olla y se reduce al mínimo al subir la presión. Dejar cocer durante 20 a 30 minutos, según la olla.
+         Una ración es un vaso de los de agua lleno de alubias hasta el borde">
+        <Ingredient id="4"/>
+        <Ingredient id="5"/>
+        <Ingredient id="6"/>
+        <Ingredient id="7"/>
+        <Ingredient id="8"/>
+        <Ingredient id="9"/>
+        <Ingredient id="10"/>
+        <Ingredient id="11"/>
+        <Ingredient id="12"/>
+        <Ingredient id="13"/>
+        <Ingredient id="14"/>
+    </Recipe>
+
+    <Recipe id="2" name="Berenjena a la plancha" people="1" elaboration="Se lava la berenjena y se corta a láminas a lo largo, o en rodajas no muy delgadas.
+        Sobre la plancha solo humedecida en aceite, se colocan las rodajas hasta que estén hechas.
+        Salar, si se quiere, un poco.">
+        <Ingredient id="15"/>
+        <Ingredient id="12"/>
+        <Ingredient id="16"/>
+    </Recipe>
+
+    <Recipe id="3" name="Tortilla de queso" people="1" elaboration="Se  pone la sartén a calentar, humedecida en aceite.
+        Se agregan los dos huevos batidos.
+        Se dejan cuajar un poco y se coloca en el centro la loncha de queso, formando después con cuidado la tortilla.">
+        <Ingredient id="17"/>
+        <Ingredient id="18"/>
+        <Ingredient id="35"/>
+    </Recipe>
+
+    <Recipe id="4" name="Judías verdes con tomate" people="4" elaboration="Se ponen todos los ingredientes en olla rápida, una vez limpios y troceados.
+        Se deja cocer durante 15 minutos aprox.
+        Una ración será un vaso de los de agua lleno hasta el borde.">
+        <Ingredient id="19"/>
+        <Ingredient id="20"/>
+        <Ingredient id="21"/>
+        <Ingredient id="22"/>
+        <Ingredient id="62"/>
+        <Ingredient id="22"/>
+        <Ingredient id="9"/>
+        <Ingredient id="23"/>
+        <Ingredient id="24"/>
+        <Ingredient id="10"/>
+    </Recipe>
+
+    <Recipe id="5" name="Filete de ternera a la plancha 2" people="1" elaboration="Se condimenta el filete de ternera con un poco de sal y pimienta(si gusta) y se coloca en la plancha
+        cuando está caliente hasta que esté hecho">
+        <Ingredient id="16"/>
+        <Ingredient id="28"/>
+        <Ingredient id="26"/>
+        <Ingredient id="27"/>
+    </Recipe>
+
+    <Recipe id="6" name="Salmón a la plancha 2" people="1" elaboration="Se sala el salmón con un poco de sal gruesa y se coloca en la plancha cuando esté caliente.
+        Se vierte sobre el pescado el chorrito de vinagre.
+        Dejar hacer durante unos minutos dándole la vuelta.">
+        <Ingredient id="28"/>
+        <Ingredient id="29"/>
+        <Ingredient id="30"/>
+    </Recipe>
+
+    <Recipe id="7" name="Ensalada de lechuga, pimiento y naranja" people="1" elaboration="Lavar y picar la lechuga, pimiento y naranja.
+        Preparar una salsa con la mostaza, el aceite, sal, limón, pimienta y tomillo. Verter sobre la ensalada.
+        Se puede suprimir la mostaza y las especias, si no gustan.">
+        <Ingredient id="31"/>
+        <Ingredient id="32"/>
+        <Ingredient id="33"/>
+        <Ingredient id="34"/>
+        <Ingredient id="35"/>
+        <Ingredient id="36"/>
+        <Ingredient id="37"/>
+        <Ingredient id="38"/>
+    </Recipe>
+    <Recipe id="8" name="Ensalada de pasta-1a1" people="1" elaboration="Se cuece la pasta en agua con sal y se escurre. Se añaden, troceados, el resto de ingredientes. Se mezcla la
+        cucharada de tomate frito con las dos cucharaditas de mayonesa, y se añade a la ensalada, mezclándolo todo.">
+        <Ingredient id="39"/>
+        <Ingredient id="40"/>
+        <Ingredient id="60"/>
+        <Ingredient id="42"/>
+        <Ingredient id="32"/>
+        <Ingredient id="43"/>
+        <Ingredient id="44"/>
+        <Ingredient id="45"/>
+        <Ingredient id="46"/>
+    </Recipe>
+    <Recipe id="9" name="Champiñones al ajillo" people="1" elaboration="En un platito de barro con el aceite se colocan los champiñones, sal y ajo picado(también se puede hacer en una
+        cazuelita o sartén). Se ponen a fuego mediano durante 5 minutos y se exprime el medio limón poniéndo el fuego más vivo durante otros 5 minutos. Al servir se espolvorean con el perejil.">
+        <Ingredient id="12"/>
+        <Ingredient id="47"/>
+        <Ingredient id="48"/>
+        <Ingredient id="10"/>
+        <Ingredient id="35"/>
+        <Ingredient id="49"/>
+    </Recipe>
+    <Recipe id="10" name="Pechuga de pollo a la plancha" people="1" elaboration="Se condimentan los filetes de pechuga con un poco de sal y pimienta y se colocan en la plancha cuando esté caliente hasta
+        que estén hechos">
+        <Ingredient id="50"/>
+        <Ingredient id="16"/>
+        <Ingredient id="12"/>
+        <Ingredient id="26"/>
+    </Recipe>
+    <Recipe id="11" name="Garbanzos en ensalada sin huevo 1" people="1" elaboration="Ponemos primero en la ensaladera los garbanzos que se habrán cocido en agua con sal previamente(pueden ser de bote,
+        en este caso, poner medio bote, 200g) y sobre ellos añadimos el tomate en cuadraditos, el atún natural, cebolla muy picada, el pimiento en trocitos y mezclamos todo.
+        Se agrega el perejil y se aliña con el aceite y vinagre.
+        Una ración será la receta completa.">
+        <Ingredient id="51"/>
+        <Ingredient id="52"/>
+        <Ingredient id="29"/>
+        <Ingredient id="53"/>
+        <Ingredient id="54"/>
+        <Ingredient id="25"/>
+        <Ingredient id="55"/>
+        <Ingredient id="56"/>
+        <Ingredient id="57"/>
+    </Recipe>
+    <Recipe id="12" name="Revuelto de cebolla y pimiento verde con gulas" people="1" elaboration="Se trocean pequeños el ajo, cebolla y pimiento, y se deja hacer en la sartén despacito y tapado con la
+        cucharadita de aceite.
+        Cuando la cebolla esté transparente, se añaden las gulas y se mezcla todo.
+        Se añaden los huevos y se cuajan, removiéndolo todo despacio. Casi al final se agrega el perejil.">
+        <Ingredient id="17"/>
+        <Ingredient id="58"/>
+        <Ingredient id="51"/>
+        <Ingredient id="59"/>
+        <Ingredient id="60"/>
+        <Ingredient id="10"/>
+        <Ingredient id="35"/>
+    </Recipe>
+
+    <Recipe id="13" name="Ensalada de lechuga y tomate" people="1" elaboration="Se lavan y trocean la pechuga y el tomate, y se aliñan con una cucharadita de aceite de oliva y vinagre al gusto.
+        Se puede añadir sal, aunque poca.">
+        <Ingredient id="42"/>
+        <Ingredient id="46"/>
+        <Ingredient id="35"/>
+        <Ingredient id="29"/>
+    </Recipe>
+    <Recipe id="14" name="Vinagreta 5" people="1" elaboration="Cocer la patata y la zanahoria. Se pelan y trocean en un plato o ensalader. Se lava y corta en juliana la lechuga.
+        Se aaden el tomate, el atún, los espárragos y la cebolla. Se aliña con una cucharada de aceite de oliva y el vinagre que se quiera. Usar poca sal.
+        El atún puede ser también en escabeche.
+        Una ración será la receta completa.">
+        <Ingredient id="29"/>
+        <Ingredient id="12"/>
+        <Ingredient id="31"/>
+        <Ingredient id="56"/>
+        <Ingredient id="57"/>
+        <Ingredient id="25"/>
+        <Ingredient id="61"/>
+        <Ingredient id="62"/>
+        <Ingredient id="22"/>
+    </Recipe>
+    <Recipe id="15" name="Lomo de cerdo a la plancha 2" people="1" elaboration="Impregnar la plancha con un poco de aceite, y cocinar el lomo (fresco o adobado">
+        <Ingredient id="63"/>
+        <Ingredient id="35"/>
+    </Recipe>
+
+    <Recipe id="16" name="Ensalada de lechuga, piña y naranja" people="1" elaboration="Lavar y picar la lechuga(mejor si es en juliana). Trocear sobre ella la piña y la naranja.
+        Aliñar con la cucharadita de aceite, sal(poca), y vinagre. También queda bien sin aceite. En este caso, se puede sustituir la cucharadita de aceite por otros 100g de naranja y un poco del jugo de piña">
+        <Ingredient id="31"/>
+        <Ingredient id="33"/>
+        <Ingredient id="43"/>
+        <Ingredient id="35"/>
+        <Ingredient id="29"/>
+        <Ingredient id="12"/>
+    </Recipe>
+
+    <Recipe id="17" name="Lentejas con chorizo" people="2" elaboration="Poner las lentejas a remojo la noche anterior. Se ponen en la olla rápida 2 vasos de agua hasta el borde,
+        junto a todos los ingredientes una vez limpios y troceados.
+        Se deja cocer 15 minutos.
+        Una ración será un vaso de agua lleno hasta el borde">
+        <Ingredient id="64"/>
+        <Ingredient id="19"/>
+        <Ingredient id="65"/>
+        <Ingredient id="22"/>
+        <Ingredient id="7"/>
+        <Ingredient id="66"/>
+        <Ingredient id="9"/>
+        <Ingredient id="11"/>
+        <Ingredient id="10"/>
+        <Ingredient id="36"/>
+        <Ingredient id="67"/>
+        <Ingredient id="12"/>
+    </Recipe>
+    <Recipe id="18" name="Brochetas de pollo y verduras" people="1" elaboration="Adobar los trozos de pechuga de pollo, añadiendo un poco de sal, ajo majado(o en polvo), orégano
+        y pimentón. Mezclar todo bien con el pollo. Si no se reparte bien, se puede humedecer ligeramente con vinagrel
+        Lavar y trocear en cuadrados los pimientos y ensartarlos en las brochetas, alternando la carne de pollo y lo demás.
+        Humedecer la plancha un poco con aceite de oliva y colocar las brochetas a asar hasta que estén bien hechas">
+        <Ingredient id="32"/>
+        <Ingredient id="68"/>
+        <Ingredient id="69"/>
+        <Ingredient id="35"/>
+        <Ingredient id="24"/>
+        <Ingredient id="48"/>
+        <Ingredient id="70"/>
+        <Ingredient id="29"/>
+        <Ingredient id="71"/>
+    </Recipe>
+    <Recipe id="19" name="Manzana con yogur" people="1" elaboration="Se pela y trocea la manzana en un plato o ensaladera pequeña. Se mezcla el yogur natural en su envase,
+        agregando si se quiere unas gotas de sacarina líquida, y se vierte después sobre la manzana troceada.
+        La ración es el plato completo.">
+        <Ingredient id="3"/>
+        <Ingredient id="72"/>
+    </Recipe>
+    <Recipe id="20" name="Arroz con calamares" people="1" elaboration="Saltear en el aceite la cebolla y el ajo bien picados. Añadir el pescado y moverlo.
+        Añadir el arror y mezclarlo.
+        Verter agua hirviendo sobre ello(aprox. el doble del volumen del arroz). Salar un poco.
+        Se puede hacer en olla o en cazuela/paellera. Tener en cuenta que el pescado ya dará bastante agua, y quizá se necesite menos de lo que se indica. Se puede añadir colorante, o azafrán, al gusto.">
+        <Ingredient id="35"/>
+        <Ingredient id="51"/>
+        <Ingredient id="60"/>
+        <Ingredient id="73"/>
+        <Ingredient id="74"/>
+        <Ingredient id="12"/>
+        <Ingredient id="75"/>
+    </Recipe>
+
+    <Recipe id="21" name="Ensalada de lechuga, tomate y cebolla" people="1" elaboration="Lavar y trocear el tomate. Lavar la lechuga y partirla en juliana. Partir también la cebolla en tiras finas.
+        Aliñar con el aceite, vinagre y sal">
+        <Ingredient id="42"/>
+        <Ingredient id="56"/>
+        <Ingredient id="51"/>
+        <Ingredient id="35"/>
+        <Ingredient id="29"/>
+        <Ingredient id="12"/>
+    </Recipe>
+    <Recipe id="22" name="Repollo al ajo arriero" people="1" elaboration="Lavar y cocer el repollo(o hacerlo al vapor) y ponerlo en una fuente.
+        Poner una cucharada de aceite y freír uno o dos dientes de ajo(al gusto). Añadir media cucharadita de pimentón y una cucharada de vinagre. Verterlo por encima del repollo y servir.">
+        <Ingredient id="48"/>
+        <Ingredient id="76"/>
+        <Ingredient id="77"/>
+        <Ingredient id="78"/>
+        <Ingredient id="25"/>
+        <Ingredient id="12"/>
+        <Ingredient id="79"/>
+    </Recipe>
+
+    <Recipe id="23" name="Leche con cereales" people="1" elaboration="Un vaso lleno de leche semidesnatada sin azúcar. Un vaso lleno de cereales.">
+        <Ingredient id="1"/>
+        <Ingredient id="2"/>
+    </Recipe>
+    <Recipe id="24" name="Media mañana" people="1" elaboration="Nada">
+        <Ingredient id="3"/>
+    </Recipe>
+
+    <Recipe id="25" name="Merienda" people="1" elaboration="Nada">
+        <Ingredient id="3"/>
+    </Recipe>
+</Recipes>

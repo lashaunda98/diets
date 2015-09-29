@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity
 
     private void paintGlassesChart()
     {
+
         List<DrankWaterGlass>glassesCollection=StorerFactory.create(MainActivity.this).getAllGlasses();
         if(glassesCollection.size()==0)return;
 
@@ -74,6 +75,10 @@ public class MainActivity extends AppCompatActivity
         lineViewGlassesChart.setShowPopup(LineView.SHOW_POPUPS_All); //optional
         lineViewGlassesChart.setBottomTextList(bottomTexts);
         lineViewGlassesChart.setDataList(dataList);
+
+
+
+
     }
 
     @Override
