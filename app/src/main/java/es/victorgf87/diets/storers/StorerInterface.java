@@ -6,6 +6,7 @@ import es.victorgf87.diets.classes.DrankWaterGlass;
 import es.victorgf87.diets.classes.ExerciseActivity;
 import es.victorgf87.diets.classes.WeightRegister;
 import es.victorgf87.diets.classes.recipes.Ingredient;
+import es.victorgf87.diets.classes.recipes.Recipe;
 
 /**
  * Created by Víctor on 26/09/2015.
@@ -20,4 +21,5 @@ public interface StorerInterface
     public void addDrankWaterGlass(DrankWaterGlass glass);
 
     public List<Ingredient> getAllIngredients();
+    public List<Recipe> getAllRecipes();
 }

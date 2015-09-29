@@ -130,13 +130,13 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         db.execSQL(queryGlasses);
 
         String queryIngredients="CREATE TABLE "+DBStorer.INGREDIENTS_TABLE_NAME+"(" +
-                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "INGREDIENTID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT UNIQUE," +
                 "WEIGHT INTEGER);";
         db.execSQL(queryIngredients);
 
         String queryRecipes="CREATE TABLE "+DBStorer.RECIPES_TABLE_NAME+"(" +
-                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "RECIPEID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT UNIQUE," +
                 "ELABORATION TEXT," +
                 "PEOPLE INTEGER);";
@@ -144,10 +144,10 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
 
         String queryRecipesIngredients="CREATE TABLE "+DBStorer.RECIPES_INGREDIENTS_TABLE_NAME+"(" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "ID1 INTEGER," +
-                "ID2 INTEGER," +
-                "FOREIGN KEY(ID1) REFERENCES "+DBStorer.RECIPES_INGREDIENTS_TABLE_NAME+"(ID)," +
-                "FOREIGN KEY(ID2) REFERENCES "+DBStorer.INGREDIENTS_TABLE_NAME+"(ID));";
+                "INGREDIENTID INTEGER," +
+                "RECIPEID INTEGER," +
+                "FOREIGN KEY(RECIPEID) REFERENCES "+DBStorer.RECIPES_TABLE_NAME+"(RECIPEID)," +
+                "FOREIGN KEY(INGREDIENTID) REFERENCES "+DBStorer.INGREDIENTS_TABLE_NAME+"(INGREDIENTID));";
         db.execSQL(queryRecipesIngredients);
 
 
@@ -157,7 +157,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
             for(Ingredient ing: ingredients)
             {
                 ContentValues values=new ContentValues();
-                values.put("ID",ing.getId());
+                values.put("INGREDIENTID",ing.getId());
                 values.put("NAME",ing.getName());
                 values.put("WEIGHT",ing.getWeight());
                 db.insert(DBStorer.INGREDIENTS_TABLE_NAME, null, values);
@@ -172,10 +172,33 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
             e.printStackTrace();
         }
 
-        try {
+
+
+        try
+        {
             List<Recipe>recipes=readRecipes(db);
+            for(Recipe recipe: recipes)
+            {
+                ContentValues recipeValues=new ContentValues();
+                recipeValues.put("NAME",recipe.getName());
+                recipeValues.put("RECIPEID", recipe.getId());
+                recipeValues.put("PEOPLE", recipe.getPeople());
+                recipeValues.put("ELABORATION",recipe.getElaboration());
+                db.insert(DBStorer.RECIPES_TABLE_NAME,null,recipeValues);
+
+                List<Integer> ingredientIds=recipe.getIngredientIds();
+                for(Integer in: ingredientIds)
+                {
+                    ContentValues values=new ContentValues();
+                    values.put("RECIPEID",recipe.getId());
+                    values.put("INGREDIENTID", in);
+                    db.insert(DBStorer.RECIPES_INGREDIENTS_TABLE_NAME,null,values);
+                }
+            }
+
             int a=3;
             int b=a;
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (XmlPullParserException e) {
@@ -205,12 +228,64 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
             int kldsajfl=kldsjf;
         }
 
+
         //if(db.isOpen())db.close();
         int a=3;
         int c=a;
-
-
     }
+
+    private List<Ingredient> getIngredientsFromRecipe(Integer recipeId)
+    {
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            List<Ingredient> ret = new ArrayList<>();
+            String[] selections = new String[]{"" + recipeId};
+            /*String query = "SELECT " + DBStorer.INGREDIENTS_TABLE_NAME + ".NAME, " +
+                    DBStorer.INGREDIENTS_TABLE_NAME +
+                    ".INGREDIENTID, "+DBStorer.INGREDIENTS_TABLE_NAME+
+                    ".WEIGHT FROM " + DBStorer.RECIPES_TABLE_NAME +
+                    " NATURAL JOIN " + DBStorer.RECIPES_INGREDIENTS_TABLE_NAME +
+                    " NATURAL JOIN " + DBStorer.INGREDIENTS_TABLE_NAME + " where " +
+                    DBStorer.RECIPES_TABLE_NAME+".RECIPEID=?";*/
+
+            String query = "SELECT " + DBStorer.INGREDIENTS_TABLE_NAME + ".NAME, " +
+                    DBStorer.INGREDIENTS_TABLE_NAME +
+                    ".INGREDIENTID, "+DBStorer.INGREDIENTS_TABLE_NAME+
+                    ".WEIGHT FROM " + DBStorer.RECIPES_TABLE_NAME +
+                    ", " + DBStorer.RECIPES_INGREDIENTS_TABLE_NAME +
+                    ", " + DBStorer.INGREDIENTS_TABLE_NAME + " where " +
+                    DBStorer.RECIPES_TABLE_NAME+".RECIPEID=? and "+DBStorer.RECIPES_TABLE_NAME+".RECIPEID="+DBStorer.RECIPES_INGREDIENTS_TABLE_NAME+".RECIPEID " +
+                    "and "+DBStorer.RECIPES_INGREDIENTS_TABLE_NAME+".INGREDIENTID="+DBStorer.INGREDIENTS_TABLE_NAME+".INGREDIENTID";
+
+            Cursor curs = db.rawQuery(query, selections);
+            Integer count=curs.getCount();
+
+
+
+            if (curs.moveToFirst()) {
+                while (!curs.isAfterLast()) {
+                    String name = curs.getString(0);
+                    Integer id=curs.getInt(1);
+                    Integer weight=curs.getInt(2);
+
+                    Ingredient ingredient=new Ingredient(id,name,weight);
+                    ret.add(ingredient);
+                    curs.moveToNext();
+                }
+            }
+
+            if (db.isOpen())
+                db.close();
+            return ret;
+        }
+        catch(Exception e)
+        {
+            int a=3;
+            int b=a;
+            return null;
+        }
+    }
+
 
     @Override
     public List<Ingredient> getAllIngredients()
@@ -236,6 +311,31 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         }
 
         if(db.isOpen())db.close();
+        return ret;
+    }
+
+    @Override
+    public List<Recipe> getAllRecipes()
+    {
+        SQLiteDatabase db=getReadableDatabase();
+        List<Recipe> ret=new ArrayList<>();
+        String query="Select RECIPEID, NAME, PEOPLE, ELABORATION from "+DBStorer.RECIPES_TABLE_NAME+";";
+        Cursor cursor=db.rawQuery(query,null);
+        if(cursor.moveToFirst())
+        {
+            while(!cursor.isAfterLast())
+            {
+                Integer id=cursor.getInt(0);
+                String name=cursor.getString(1);
+                Integer people=cursor.getInt(2);
+                String elaboration=cursor.getString(3);
+                Recipe newRecipe=new Recipe(elaboration,id,name,people);
+                List<Ingredient> ingredients=this.getIngredientsFromRecipe(id);
+                newRecipe.setIngredients(ingredients);
+                ret.add(newRecipe);
+                cursor.moveToNext();
+            }
+        }
         return ret;
     }
 
@@ -295,7 +395,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
     {
         SQLiteDatabase db=getWritableDatabase();
         ContentValues cv=new ContentValues();
-        cv.put("timestamp",glass.getDateTimeStamp());
+        cv.put("timestamp", glass.getDateTimeStamp());
 
         db.insert(DBStorer.GLASSES_TABLE_NAME,null,cv);
     }
@@ -369,7 +469,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
     private Ingredient getIngredientById(Integer id, SQLiteDatabase db)
     {
         String[] selection=new String[]{""+id};
-        String query="select ID, NAME, WEIGHT from "+DBStorer.INGREDIENTS_TABLE_NAME+" where ID=?";
+        String query="select INGREDIENTID, NAME, WEIGHT from "+DBStorer.INGREDIENTS_TABLE_NAME+" where INGREDIENTID=?";
         Cursor cursor=db.rawQuery(query,selection);
         if(cursor.moveToFirst())
         {

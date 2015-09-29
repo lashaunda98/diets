@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity
         lineViewGlassesChart.setDataList(dataList);
 
 
+
+
     }
 
     @Override
