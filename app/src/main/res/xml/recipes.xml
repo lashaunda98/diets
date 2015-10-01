@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Recipes [
+    <!ELEMENT Recipes (Recipe)*>
+    <!ELEMENT Recipe (Ingredient)*>
+    <!ATTLIST Recipe
+        elaboration CDATA #REQUIRED
+        id CDATA #REQUIRED
+        name CDATA #REQUIRED
+        people CDATA #REQUIRED>
+    <!ELEMENT Ingredient (#PCDATA)>
+    <!ATTLIST Ingredient
+        id CDATA #REQUIRED>
+    ]>
 <Recipes>
     <Recipe id="1" name="Alubias con chorizo" people="4" elaboration="Se ponen las alubias a remojo la noche anterior. Al día siguiente se ponen los 3 vasos de agua
          en la olla y se añaden las alubias y el resto de los ingredientes troceados. Se tapa la olla y se reduce al mínimo al subir la presión. Dejar cocer durante 20 a 30 minutos, según la olla.
@@ -203,7 +215,7 @@
         <Ingredient id="3"/>
         <Ingredient id="72"/>
     </Recipe>
-    <Recipe id="20" name="Arroz con calamares" people="1" elaboration="Saltear en el aceite la cebolla y el ajo bien picados. Añadir el pescado y moverlo.
+    <Recipe id="20" name="Arroz con calamares 1" people="1" elaboration="Saltear en el aceite la cebolla y el ajo bien picados. Añadir el pescado y moverlo.
         Añadir el arror y mezclarlo.
         Verter agua hirviendo sobre ello(aprox. el doble del volumen del arroz). Salar un poco.
         Se puede hacer en olla o en cazuela/paellera. Tener en cuenta que el pescado ya dará bastante agua, y quizá se necesite menos de lo que se indica. Se puede añadir colorante, o azafrán, al gusto.">
@@ -240,11 +252,16 @@
         <Ingredient id="1"/>
         <Ingredient id="2"/>
     </Recipe>
-    <Recipe id="24" name="Media mañana" people="1" elaboration="Nada">
+    <Recipe id="24" name="Fruta" people="1" elaboration="Nada">
         <Ingredient id="3"/>
     </Recipe>
-
-    <Recipe id="25" name="Merienda" people="1" elaboration="Nada">
-        <Ingredient id="3"/>
+    <Recipe id="25" name="Yogur desnatado" people="1" elaboration="Nada">
+        <Ingredient id="72"/>
+    </Recipe>
+    <Recipe id="26" name="Piña en rodajas en su jugo" people="1" elaboration="Nada">
+        <Ingredient id="43"/>
+    </Recipe>
+    <Recipe id="27" name="Huevo opcional" people="1" elaboration="Cocido">
+        <Ingredient id="44"/>
     </Recipe>
 </Recipes>

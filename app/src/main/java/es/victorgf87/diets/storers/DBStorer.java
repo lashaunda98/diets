@@ -21,6 +21,7 @@ import es.victorgf87.diets.classes.DrankWaterGlass;
 import es.victorgf87.diets.classes.ExerciseActivity;
 import es.victorgf87.diets.classes.WeightRegister;
 import es.victorgf87.diets.classes.recipes.Ingredient;
+import es.victorgf87.diets.classes.recipes.Menu;
 import es.victorgf87.diets.classes.recipes.Recipe;
 
 /**
@@ -205,7 +206,15 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
             e.printStackTrace();
         }
 
-
+        try {
+            List<Menu> menus=readMenus();
+            int a=3;
+            int b=a;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
 
 
         try {
@@ -456,7 +465,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
             }
             catch(Exception e)
             {
-
+                int a=3;
             }
             pars.next();
             eventType=pars.getEventType();
@@ -513,6 +522,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
             }
             catch(Exception e)
             {
+                int a=3;
 
             }
             pars.next();
@@ -520,6 +530,78 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         }
         int a=3;
         int b=a;
+        return ret;
+    }
+
+
+    private List<Menu> readMenus() throws IOException, XmlPullParserException
+    {
+        List<Menu> ret=new ArrayList<>();
+        XmlResourceParser pars=context.getResources().getXml(R.xml.menus);
+
+        int eventType=pars.getEventType();
+        String currentName=null;
+        Integer currentCals=null;
+        Integer currentId=null;
+        String parsed=null;
+        String currentDescription=null;
+
+        while(eventType!=XmlResourceParser.END_DOCUMENT)
+        {
+            try {
+                String nameGotten=pars.getName();
+                Log.d("DBStorer", "El nombre es "+nameGotten);
+                if(nameGotten!=null && nameGotten.equals("Menu"))
+                {
+                    try
+                    {
+                        currentId=Integer.parseInt(pars.getAttributeValue(null, "id"));
+                        pars.next();
+                        pars.next();
+                        List<Recipe>recipes=extractRecipeListFromTag(pars);
+                        int a=3;
+                    }
+                    catch(Exception e)
+                    {
+                        int a=3;
+                        int b=a;
+                    }
+
+
+                    //ret.add(new ExerciseActivity(currentCals, currentName));
+
+                }
+
+
+            }
+            catch(Exception e)
+            {
+                int a=3;
+            }
+            pars.next();
+            eventType=pars.getEventType();
+        }
+
+        return ret;
+    }
+
+    private List<Recipe> extractRecipeListFromTag(XmlResourceParser pars) throws IOException, XmlPullParserException {
+
+        List<Recipe> recipes=new ArrayList<>();
+        String nameGotten=pars.getName();
+        while(nameGotten.equals("Recipe"))
+        {
+            Integer currentId=Integer.parseInt(pars.getAttributeValue(null,"id"));
+
+            int a=3;
+        }
+        return recipes;
+    }
+
+    private Recipe getRecipeById(Integer id)
+    {
+        Recipe ret=null;
+        String query="select "
         return ret;
     }
 

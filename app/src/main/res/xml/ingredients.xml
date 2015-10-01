@@ -177,6 +177,8 @@
     <Ingredient id="92" name="Nectarina pequeña" weight="100"/>
     <Ingredient id="93" name="Ciruelas 2" weight="150"/>
 
+    <Ingredient id="43" name="Piña en rodajas en su jugo de Carrefour, 2 rodajas grandes o 4 pequeñas" weight="140"/>
+    <Ingredient id="44" name="Huevo cocido opcional" weight="60"/>
 
 
 </Ingredients>
