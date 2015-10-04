@@ -18,6 +18,11 @@ android {
         }
     }
 }
+configurations{
+    compile.exclude module: 'stax'
+    compile.exclude module: 'stax-api'
+    compile.exclude module: 'xpp3'
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -32,4 +37,8 @@ dependencies {
     testCompile 'org.robolectric:robolectric:3.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.github.HackPlan:AndroidCharts:195635f8ee' //Charts -> https://github.com/HackPlan/AndroidCharts
+    compile ("org.simpleframework:simple-xml:2.7.1"){
+//APPcompat, maintains compatibility with older SO versions.
+        exclude module: 'support-v4'
+    }
 }

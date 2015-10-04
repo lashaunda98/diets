@@ -95,6 +95,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
     }
 
 
+
     /**
      * Called when the database is created for the first time. This is where the
      * creation of tables and the initial population of the tables should happen.
@@ -206,15 +207,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
             e.printStackTrace();
         }
 
-        try {
-            List<Menu> menus=readMenus();
-            int a=3;
-            int b=a;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        }
+
 
 
         try {
@@ -601,7 +594,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
     private Recipe getRecipeById(Integer id)
     {
         Recipe ret=null;
-        String query="select "
+        String query="select ";
         return ret;
     }
 

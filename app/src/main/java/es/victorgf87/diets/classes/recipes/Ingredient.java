@@ -1,12 +1,19 @@
 package es.victorgf87.diets.classes.recipes;
 
+import org.simpleframework.xml.Attribute;
+
 /**
  * Created by Víctor on 27/09/2015.
  */
 public class Ingredient
 {
+    @Attribute
     private Integer id;
+
+    @Attribute
     private Integer weight;
+
+    @Attribute
     private String name;
 
 
