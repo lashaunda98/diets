@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
     defaultConfig {
@@ -37,6 +37,8 @@ dependencies {
     testCompile 'org.robolectric:robolectric:3.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.github.HackPlan:AndroidCharts:195635f8ee' //Charts -> https://github.com/HackPlan/AndroidCharts
+    compile 'io.reactivex:rxandroid:0.23.0'
+
     compile ("org.simpleframework:simple-xml:2.7.1"){
 //APPcompat, maintains compatibility with older SO versions.
         exclude module: 'support-v4'

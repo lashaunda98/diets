@@ -2,15 +2,21 @@ package es.victorgf87.diets.storers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -94,17 +100,11 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         this.context=context;
     }
 
-
-
-    /**
-     * Called when the database is created for the first time. This is where the
-     * creation of tables and the initial population of the tables should happen.
-     *
-     * @param db The database.
-     */
-    @Override
-    public void onCreate(SQLiteDatabase db)
+    private void createTables(SQLiteDatabase db)
     {
+        /*
+            Creating weight register table
+         */
         String queryWeights="CREATE TABLE "+DBStorer.WEIGHT_REGISTERS_TABLE_NAME+
                 "(ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "TIMESTAMP LONG," +
@@ -114,7 +114,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
 
 
         /**
-         * Creating, parsing activities and storing them
+         * Creating, activities table
          */
         String queryActivities="CREATE TABLE "+DBStorer.ACTIVITIES_TABLE_NAME+
                 "(ID INTEGER PRIMARY KEY AUTOINCREMENT,"+
@@ -122,7 +122,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
                 "NAME TEXT UNIQUE);";
         db.execSQL(queryActivities);
 
-        /**
+        /*
          * Creating table for glasses
          */
 
@@ -131,12 +131,19 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
                 "TIMESTAMP LONG);";
         db.execSQL(queryGlasses);
 
+
+        /*
+         * Creating table for ingredients
+         */
         String queryIngredients="CREATE TABLE "+DBStorer.INGREDIENTS_TABLE_NAME+"(" +
                 "INGREDIENTID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT UNIQUE," +
                 "WEIGHT INTEGER);";
         db.execSQL(queryIngredients);
 
+        /*
+            Creaging table for recipes
+         */
         String queryRecipes="CREATE TABLE "+DBStorer.RECIPES_TABLE_NAME+"(" +
                 "RECIPEID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT UNIQUE," +
@@ -144,6 +151,9 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
                 "PEOPLE INTEGER);";
         db.execSQL(queryRecipes);
 
+        /*
+            Creating n:n table between ingredients and recipes.
+         */
         String queryRecipesIngredients="CREATE TABLE "+DBStorer.RECIPES_INGREDIENTS_TABLE_NAME+"(" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "INGREDIENTID INTEGER," +
@@ -151,8 +161,11 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
                 "FOREIGN KEY(RECIPEID) REFERENCES "+DBStorer.RECIPES_TABLE_NAME+"(RECIPEID)," +
                 "FOREIGN KEY(INGREDIENTID) REFERENCES "+DBStorer.INGREDIENTS_TABLE_NAME+"(INGREDIENTID));";
         db.execSQL(queryRecipesIngredients);
+    }
 
 
+    private void populateIngredients(SQLiteDatabase db)
+    {
         try
         {
             List<Ingredient> ingredients=readIngredients();
@@ -173,9 +186,10 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         {
             e.printStackTrace();
         }
+    }
 
-
-
+    private void populateRecipes(SQLiteDatabase db)
+    {
         try
         {
             List<Recipe>recipes=readRecipes(db);
@@ -206,10 +220,10 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
+    }
 
-
-
-
+    private void populateExerciseActivities(SQLiteDatabase db)
+    {
         try {
             List<ExerciseActivity>activities= readExerciseActivities();
             for(ExerciseActivity ea: activities)
@@ -229,11 +243,81 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
             int kldsjf=3;
             int kldsajfl=kldsjf;
         }
+    }
+
+    /**
+     * Called when the database is created for the first time. This is where the
+     * creation of tables and the initial population of the tables should happen.
+     *
+     * @param db The database.
+     */
+    @Override
+    public void onCreate(SQLiteDatabase db)
+    {
+        createTables(db);
+        /*populateIngredients(db);
+        populateRecipes(db);
+        populateExerciseActivities(db);*/
+
+
+
+
+
+        try {
+            String readString=readAsset(context.getAssets(),"recipess.xml");
+            Serializer serializer = new Persister();
+            Recipe recipe = serializer.read(Recipe.class, readString);
+            int a=3;
+            int b=a;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
 
         //if(db.isOpen())db.close();
-        int a=3;
-        int c=a;
+    }
+
+    /**
+     * Reads the text of an asset. Should not be run on the UI thread.
+     *
+     * @param mgr
+     *            The {@link AssetManager} obtained via {@link Context#getAssets()}
+     * @param path
+     *            The path to the asset.
+     * @return The plain text of the asset
+     */
+    public static String readAsset(AssetManager mgr, String path) {
+        String contents = "";
+        InputStream is = null;
+        BufferedReader reader = null;
+        try {
+            is = mgr.open(path);
+            reader = new BufferedReader(new InputStreamReader(is));
+            contents = reader.readLine();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                contents += '\n' + line;
+            }
+        } catch (final Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException ignored) {
+                }
+            }
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException ignored) {
+                }
+            }
+        }
+        return contents;
     }
 
     private List<Ingredient> getIngredientsFromRecipe(Integer recipeId)
