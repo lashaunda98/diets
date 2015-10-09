@@ -1,12 +1,19 @@
-package es.victorgf87.diets.classes;
+package es.victorgf87.diets.classes.exerciseactivities;
+
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Root;
 
 /**
  * Created by Víctor on 26/09/2015.
  */
+@Root(name="activity", strict = false)
 public class ExerciseActivity
 {
+    @Attribute
     private Integer id;
+    @Attribute
     private String name;
+    @Attribute(name="loss")
     private Integer calsLoss;
 
     public ExerciseActivity() {

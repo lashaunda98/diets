@@ -3,7 +3,6 @@ package es.victorgf87.diets.storers;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -22,13 +21,18 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import es.victorgf87.diets.R;
 import es.victorgf87.diets.classes.DrankWaterGlass;
-import es.victorgf87.diets.classes.ExerciseActivity;
 import es.victorgf87.diets.classes.WeightRegister;
+import es.victorgf87.diets.classes.exerciseactivities.ExerciseActivity;
+import es.victorgf87.diets.classes.exerciseactivities.ExerciseActivityWrapperList;
+import es.victorgf87.diets.classes.recipes.EquivalentIngredient;
+import es.victorgf87.diets.classes.recipes.EquivalentIngredientsWrapper;
 import es.victorgf87.diets.classes.recipes.Ingredient;
+import es.victorgf87.diets.classes.recipes.IngredientWrapperList;
 import es.victorgf87.diets.classes.recipes.Menu;
+import es.victorgf87.diets.classes.recipes.MenuWrapperList;
 import es.victorgf87.diets.classes.recipes.Recipe;
+import es.victorgf87.diets.classes.recipes.RecipeWrapperList;
 
 /**
  * Created by Víctor on 26/09/2015.
@@ -44,6 +48,7 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
     private final static String INGREDIENTS_TABLE_NAME="INGREDIENTS";
     private final static String RECIPES_TABLE_NAME="RECIPES";
     private final static String RECIPES_INGREDIENTS_TABLE_NAME="RECIPESINGREDIENTS";
+    private final static String EQUIVALENT_INGREDIENTS_TABLE_NAME="EQUIVALENTINGREDIENTS";
 
 
     @Override
@@ -142,6 +147,18 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         db.execSQL(queryIngredients);
 
         /*
+        Creating N:N table for equivalent ingredients
+         */
+
+        String queryEquivalentIngredients="CREATE TABLE "+DBStorer.EQUIVALENT_INGREDIENTS_TABLE_NAME+"(" +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "ID1 INTEGER," +
+                "ID2 INTEGER," +
+                "FOREIGN KEY(ID1) REFERENCES "+DBStorer.INGREDIENTS_TABLE_NAME+"(INGREDIENTID)," +
+                "FOREIGN KEY(ID2) REFERENCES "+DBStorer.INGREDIENTS_TABLE_NAME+"(INGREDIENTID)," +
+                ");";
+
+        /*
             Creaging table for recipes
          */
         String queryRecipes="CREATE TABLE "+DBStorer.RECIPES_TABLE_NAME+"(" +
@@ -219,6 +236,8 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
             e.printStackTrace();
         } catch (XmlPullParserException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -255,30 +274,65 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
     public void onCreate(SQLiteDatabase db)
     {
         createTables(db);
-        /*populateIngredients(db);
+        populateIngredients(db);
         populateRecipes(db);
-        populateExerciseActivities(db);*/
+        populateExerciseActivities(db);
+        populateEquivalentIngredients(db);
 
 
-
-
-
-        try {
-            String readString=readAsset(context.getAssets(),"recipess.xml");
-            Serializer serializer = new Persister();
-            Recipe recipe = serializer.read(Recipe.class, readString);
-            int a=3;
-            int b=a;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 
 
         //if(db.isOpen())db.close();
     }
+
+
+    private void populateEquivalentIngredients(SQLiteDatabase db)
+    {
+        try {
+            List<EquivalentIngredient>equivalences= readEquivalentIngredients();
+            for(EquivalentIngredient equivalence:equivalences)
+            {
+                ContentValues cv=new ContentValues();
+                cv.put("ID", equivalence.getId());
+                cv.put("ID1", equivalence.getId1());
+                cv.put("ID2", equivalence.getId2());
+                db.insert(DBStorer.EQUIVALENT_INGREDIENTS_TABLE_NAME,null,cv);
+
+            }
+            /*for(ExerciseActivity ea: activities)
+            {
+                ContentValues cv=new ContentValues();
+                cv.put("LOSS",ea.getCalsLoss());
+                cv.put("NAME",ea.getName());
+                db.insert(DBStorer.ACTIVITIES_TABLE_NAME, null, cv);
+            }*/
+            int a=3;
+            int b=a;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            int kldsjf=3;
+            int kldsajfl=kldsjf;
+        }
+    }
+
+    private List<EquivalentIngredient> readEquivalentIngredients() throws Exception {
+        String readString=readAsset(context.getAssets(), "equivalent_ingredients.xml");
+        Serializer serializer = new Persister();
+
+        EquivalentIngredientsWrapper ingredientList=serializer.read(EquivalentIngredientsWrapper.class, readString);
+        return ingredientList.list;
+    }
+
+
+
+
+
 
     /**
      * Reads the text of an asset. Should not be run on the UI thread.
@@ -487,76 +541,19 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
     }
 
 
-    private List<Recipe>readRecipes(SQLiteDatabase db) throws IOException, XmlPullParserException
-    {
-        List<Recipe>ret=new ArrayList<>();
-        XmlResourceParser pars= context.getResources().getXml(R.xml.recipes);
-        int eventType=pars.getEventType();
-        Integer currentId=null;
-        String currentName=null;
-        Integer currentPeople=null;
-        String currentElaboration=null;
-        String parsed=null;
+    private List<Recipe>readRecipes(SQLiteDatabase db) throws Exception {
+        String readString=readAsset(context.getAssets(), "recipes.xml");
+        Serializer serializer = new Persister();
 
-
-
-        while(eventType!=XmlResourceParser.END_DOCUMENT)
-        {
-            try {
-                String nameGotten=pars.getName();
-                Log.d("DBStorer", "El nombre es "+nameGotten);
-                if(nameGotten!=null && nameGotten.equals("Recipe"))
-                {
-                    currentId=Integer.valueOf(pars.getAttributeValue(null, "id"));
-                    currentName=pars.getAttributeValue(null, "name");
-                    currentPeople =Integer.parseInt(pars.getAttributeValue(null, "people"));
-                    currentElaboration=pars.getAttributeValue(null,"elaboration");
-                    Recipe newRecipe=new Recipe(currentElaboration,currentId,currentName,currentPeople);
-
-                    pars.next();
-                    nameGotten=pars.getName();
-                    while(nameGotten.equals("Ingredient"))
-                    {
-                        try {
-                            Integer currentIngredientId = Integer.parseInt(pars.getAttributeValue(null, "id"));
-                            Ingredient currentIngredient = getIngredientById(currentIngredientId, db);
-                            newRecipe.addIngredient(currentIngredient);
-
-                            int a = 3;
-                            int b = a;
-                        }
-                        catch(Exception e)
-                        {
-                            e.printStackTrace();
-                            int a=3;
-                            int b=a;
-                        }
-                        pars.next();
-                        nameGotten = pars.getName();
-                    }
-                    ret.add(newRecipe);
-
-                }
-
-
-            }
-            catch(Exception e)
-            {
-                int a=3;
-            }
-            pars.next();
-            eventType=pars.getEventType();
-        }
-        int a=3;
-        int b=a;
-        return ret;
+        RecipeWrapperList ingredientList=serializer.read(RecipeWrapperList.class, readString);
+        return ingredientList.list;
     }
 
     private Ingredient getIngredientById(Integer id, SQLiteDatabase db)
     {
         String[] selection=new String[]{""+id};
         String query="select INGREDIENTID, NAME, WEIGHT from "+DBStorer.INGREDIENTS_TABLE_NAME+" where INGREDIENTID=?";
-        Cursor cursor=db.rawQuery(query,selection);
+        Cursor cursor=db.rawQuery(query, selection);
         if(cursor.moveToFirst())
         {
             String name=cursor.getString(1);
@@ -566,114 +563,28 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         return null;
     }
 
-    private List<Ingredient> readIngredients()throws IOException, XmlPullParserException
+    private List<Ingredient> readIngredients() throws Exception
     {
-        // Create ResourceParser for XML file
-        //XmlResourceParser xpp = context.getResources().getXml(R.xml.activities);
-        List<Ingredient> ret=new ArrayList<>();
+        String readString=readAsset(context.getAssets(), "ingredients.xml");
+        Serializer serializer = new Persister();
 
+        IngredientWrapperList ingredientList=serializer.read(IngredientWrapperList.class, readString);
+        return ingredientList.list;
 
-        XmlResourceParser pars= context.getResources().getXml(R.xml.ingredients);
-
-
-        int eventType=pars.getEventType();
-        String currentName=null;
-        Integer currentWeight=null;
-        String parsed=null;
-        Integer currentId=null;
-        while(eventType!=XmlResourceParser.END_DOCUMENT)
-        {
-            try {
-                String nameGotten=pars.getName();
-                Log.d("DBStorer", "El nombre es "+nameGotten);
-                if(nameGotten!=null && nameGotten.equals("Ingredient"))
-                {
-                    currentId=Integer.valueOf(pars.getAttributeValue(null,"id"));
-                    currentName=pars.getAttributeValue(null, "name");
-                    currentWeight =Integer.parseInt(pars.getAttributeValue(null,"weight"));
-                    ret.add(new Ingredient(currentId,currentName,currentWeight));
-
-                }
-
-
-            }
-            catch(Exception e)
-            {
-                int a=3;
-
-            }
-            pars.next();
-            eventType=pars.getEventType();
-        }
-        int a=3;
-        int b=a;
-        return ret;
     }
 
 
-    private List<Menu> readMenus() throws IOException, XmlPullParserException
+    private List<Menu> readMenus() throws Exception
     {
-        List<Menu> ret=new ArrayList<>();
-        XmlResourceParser pars=context.getResources().getXml(R.xml.menus);
+        String readString=readAsset(context.getAssets(), "menus.xml");
+        Serializer serializer = new Persister();
 
-        int eventType=pars.getEventType();
-        String currentName=null;
-        Integer currentCals=null;
-        Integer currentId=null;
-        String parsed=null;
-        String currentDescription=null;
+        MenuWrapperList ingredientList=serializer.read(MenuWrapperList.class, readString);
+        return ingredientList.list;
 
-        while(eventType!=XmlResourceParser.END_DOCUMENT)
-        {
-            try {
-                String nameGotten=pars.getName();
-                Log.d("DBStorer", "El nombre es "+nameGotten);
-                if(nameGotten!=null && nameGotten.equals("Menu"))
-                {
-                    try
-                    {
-                        currentId=Integer.parseInt(pars.getAttributeValue(null, "id"));
-                        pars.next();
-                        pars.next();
-                        List<Recipe>recipes=extractRecipeListFromTag(pars);
-                        int a=3;
-                    }
-                    catch(Exception e)
-                    {
-                        int a=3;
-                        int b=a;
-                    }
-
-
-                    //ret.add(new ExerciseActivity(currentCals, currentName));
-
-                }
-
-
-            }
-            catch(Exception e)
-            {
-                int a=3;
-            }
-            pars.next();
-            eventType=pars.getEventType();
-        }
-
-        return ret;
     }
 
-    private List<Recipe> extractRecipeListFromTag(XmlResourceParser pars) throws IOException, XmlPullParserException {
 
-        List<Recipe> recipes=new ArrayList<>();
-        String nameGotten=pars.getName();
-        while(nameGotten.equals("Recipe"))
-        {
-            Integer currentId=Integer.parseInt(pars.getAttributeValue(null,"id"));
-
-            int a=3;
-        }
-        return recipes;
-    }
 
     private Recipe getRecipeById(Integer id)
     {
@@ -682,45 +593,12 @@ public class DBStorer extends SQLiteOpenHelper implements StorerInterface
         return ret;
     }
 
-    private List<ExerciseActivity> readExerciseActivities()  throws IOException, XmlPullParserException
-    {
-        // Create ResourceParser for XML file
-        //XmlResourceParser xpp = context.getResources().getXml(R.xml.activities);
-        List<ExerciseActivity> ret=new ArrayList<>();
+    private List<ExerciseActivity> readExerciseActivities() throws Exception {
+        String readString=readAsset(context.getAssets(), "activities.xml");
+        Serializer serializer = new Persister();
 
-
-        XmlResourceParser pars= context.getResources().getXml(R.xml.activities);
-
-
-        int eventType=pars.getEventType();
-        String currentName=null;
-        Integer currentCals=null;
-        String parsed=null;
-        while(eventType!=XmlResourceParser.END_DOCUMENT)
-        {
-            try {
-                String nameGotten=pars.getName();
-                Log.d("DBStorer", "El nombre es "+nameGotten);
-                if(nameGotten!=null && nameGotten.equals("activity"))
-                {
-                    currentName=pars.getAttributeValue(null,"name");
-                    currentCals =Integer.parseInt(pars.getAttributeValue(null,"loss"));
-                    ret.add(new ExerciseActivity(currentCals, currentName));
-
-                }
-
-
-            }
-            catch(Exception e)
-            {
-
-            }
-            pars.next();
-            eventType=pars.getEventType();
-        }
-        int a=3;
-        int b=a;
-        return ret;
+        ExerciseActivityWrapperList ingredientList=serializer.read(ExerciseActivityWrapperList.class, readString);
+        return ingredientList.list;
     }
 
 

@@ -1,16 +1,22 @@
 package es.victorgf87.diets.classes.recipes;
 
+import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Root;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Víctor on 27/09/2015.
  */
+@Root(name="Recipe", strict = false)
 public class Recipe
 {
     private Integer id;
     private String name, elaboration;
     private Integer people;
+
+    @ElementList(entry="Ingredient",inline = true)
     private List<Ingredient> ingredients;
 
     public Recipe(String elaboration, Integer id, String name, Integer people) {

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Menus [
+    <!ELEMENT Menus (Menu)*>
+    <!ELEMENT Menu (Breakfast|Morning|Lunch|Afternoon|Dinner)*>
+    <!ATTLIST Menu
+        id CDATA #REQUIRED>
+    <!ELEMENT Breakfast (Recipe)*>
+    <!ELEMENT Recipe (#PCDATA)>
+    <!ATTLIST Recipe
+        id CDATA #REQUIRED>
+    <!ELEMENT Morning (Recipe)*>
+    <!ELEMENT Lunch (Recipe)*>
+    <!ATTLIST Lunch
+        description CDATA #REQUIRED>
+    <!ELEMENT Afternoon (Recipe)*>
+    <!ELEMENT Dinner (Recipe)*>
+    <!ATTLIST Dinner
+        description CDATA #REQUIRED>
+    ]>
+<Menus>
+    <Menu  id="1">
+        <Breakfast>
+            <Recipe id="23"/>
+        </Breakfast>
+        <Morning>
+            <Recipe id="24"/>
+        </Morning>
+        <Lunch description="DOS raciones y media de alubias con chorizo(DOS vasos llenos hasta el borde y medio más).
+        Un yogur desnatado, natural o de sabores, sin azúcar">
+            <Recipe id="1"/>
+            <Recipe id="25"/>
+        </Lunch>
+        <Afternoon>
+            <Recipe id="24"/>
+        </Afternoon>
+        <Dinner description="Una ración de berenjena a la plancha(la receta completa).
+        Una tortilla de queso.
+        Ver recetas.
+        2 rodajas grandes o 4 pequeñas de piña al natural o en su jugo (una latita).
+        Un yogur desnatado, natural o de sabores, sin azúcar.">
+            <Recipe id="2"/>
+            <Recipe id="3"/>
+            <Recipe id="26"/>
+            <Recipe id="25"/>
+        </Dinner>
+    </Menu>
+
+    <Menu id="2">
+        <Breakfast>
+            <Recipe id="23"/>
+        </Breakfast>
+        <Morning>
+            <Recipe id="24"/>
+        </Morning>
+        <Lunch description="DOS raciones de judías verdes con tomate(DOS vasos llenos hasta el borde.
+        150g de filete de ternera magro(sin grasa) a la plancha, con 3 pimientos de piquillo.
+        Un yogur desnatado, sin azúcar.">
+            <Recipe id="4"/>
+            <Recipe id="5"/>
+            <Recipe id="25"/>
+        </Lunch>
+        <Afternoon>
+            <Recipe id="24"/>
+        </Afternoon>
+        <Dinner description="200g de salmón a la plancha, pesado en limpio y crudo.
+        Una ensalada de lechuga, pimiento y naranja como se indica.
+        Ver recetas.
+        Un yogur desnatado, sin azúcar.">
+            <Recipe id="6"/>
+            <Recipe id="7"/>
+            <Recipe id="25"/>
+        </Dinner>
+    </Menu>
+
+    <Menu id="3">
+        <Breakfast>
+            <Recipe id="23"/>
+        </Breakfast>
+        <Morning>
+            <Recipe id="24"/>
+        </Morning>
+        <Lunch description="Una ensalada de pasta como se indica(receta completa). La medida en vaso de la pasta puede variar según el tipo de macarrón. Mejor calcular por peso.
+        Un yogur desnatado, sin azúcar.">
+            <Recipe id="8"/>
+            <Recipe id="25"/>
+        </Lunch>
+        <Afternoon>
+            <Recipe id="24"/>
+        </Afternoon>
+        <Dinner description="Una ración de champiñones al ajillo(receta completa). 150g de pechuga de pollo a la plancha.
+        2 rodajas grandes o 4 pequeñas de piña al natural o en su jugo(una latita).
+        Un yogur desnatado, sin azúcar.">
+            <Recipe id="9"/>
+            <Recipe id="10"/>
+            <Recipe id="25"/>
+        </Dinner>
+    </Menu>
+
+    <Menu id="4">
+        <Breakfast>
+            <Recipe id="23"/>
+        </Breakfast>
+        <Morning>
+            <Recipe id="24"/>
+        </Morning>
+        <Lunch description="Una ensalada de garbanzos como se indica(receta completa). Añada otra lata de atún al natural (o en escabeche) si lo desea.
+        Un kiwi.
+        Un yogur desnatado, o fruta equivalente del listado">
+            <Recipe id="11"/>
+            <Recipe id="13"/>
+            <Recipe id="25"/>
+
+
+        </Lunch>
+        <Afternoon>
+            <Recipe id="24"/>
+        </Afternoon>
+        <Dinner description="Un revuelto de cebolla y pimiento verde con gulas.
+        Una ensalada de lechuga y tomate como se indica. Añada 2 cucharadas de zanahoria rallada(o unos aritos de cebolla)
+        Ver recetas
+        Un yogur desnatado, sin azúcar.">
+            <Recipe id="12"/>
+            <Recipe id="13"/>
+            <Recipe id="25"/>
+        </Dinner>
+    </Menu>
+
+    <Menu id="5">
+        <Breakfast>
+            <Recipe id="23"/>
+        </Breakfast>
+        <Morning>
+            <Recipe id="24"/>
+        </Morning>
+        <Lunch description="Una ensalada vinagreta como se indica(la receta completa). Cambie los espárragos por 3 pimientos del piquillo, si lo prefiere.
+        Puede añadir, además, un huevo cocido, si lo desea (u otra lata de atún al natural o en escabeche).
+        Un kiwi.
+        Un yogur desnatado, natural o de sabores, sin azúcar.">
+            <Recipe id="14"/>
+            <Recipe id="27"/>
+            <Recipe id="25"/>
+        </Lunch>
+        <Afternoon>
+            <Recipe id="24"/>
+        </Afternoon>
+        <Dinner description="150g de lomo de cerdo, fresco o adobado, a la plancha(unos 3 filetes, no muy grandes).
+        3 pimientos de piquillo
+        Una ensalada de lechuga, piña y naranja.
+        Ver recetas.
+        Yogur desnatado, sin azúcar.">
+            <Recipe id="15"/>
+            <Recipe id="16"/>
+            <Recipe id="25"/>
+        </Dinner>
+    </Menu>
+
+    <Menu id="6">
+        <Breakfast>
+            <Recipe id="23"/>
+        </Breakfast>
+        <Morning>
+            <Recipe id="24"/>
+        </Morning>
+        <Lunch description="Dos raciones y media de lentejas con chorizo(dos vasos llenos hasta el borde y medio más).
+        Un yogur desnatado sin azúcar.">
+            <Recipe id="17"/>
+            <Recipe id="25"/>
+
+        </Lunch>
+        <Afternoon>
+            <Recipe id="25"/>
+        </Afternoon>
+        <Dinner description="Una ración de brochetas de pollo y verduras(la receta completa).
+        No es necesario ensartar las brochetas.
+        De poste, manzana con yogur.
+        Ver recetas.">
+            <Recipe id="18"/>
+            <Recipe id="19"/>
+        </Dinner>
+    </Menu>
+
+    <Menu id="7">
+        <Breakfast>
+            <Recipe id="23"/>
+        </Breakfast>
+        <Morning>
+            <Recipe id="24"/>
+        </Morning>
+        <Lunch description="Una ración de arroz con calamares(la receta completa).
+        Una ensalada de lechuga, tomate y cebolla como se indica.
+        Añada dos cucharadas de zanahoria rallada y una rodaja grande(o dos pequeñas) de piña natural o en su juguo.
+        Ver recetas.
+        Un yogur desnatado sin azúcar.">
+            <Recipe id="20"/>
+            <Recipe id="21"/>
+            <Recipe id="26"/>
+            <Recipe id="25"/>
+
+        </Lunch>
+        <Afternoon>
+            <Recipe id="25"/>
+        </Afternoon>
+        <Dinner description="Una ración de repollo al ajo arriero(la receta completa).
+        150g de filete de ternera magro(sin grasa) a la plancha.
+        Un yogur desnatado, sin azúcar.">
+            <Recipe id="22"/>
+            <Recipe id="5"/>
+            <Recipe id="25"/>
+
+        </Dinner>
+    </Menu>
+
+</Menus>
+

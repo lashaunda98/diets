@@ -1,21 +1,27 @@
 package es.victorgf87.diets.classes.recipes;
 
 import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Root;
 
 /**
  * Created by Víctor on 27/09/2015.
  */
+@Root(name="Ingredient", strict = false)
 public class Ingredient
 {
-    @Attribute
+    @Attribute(name="id")
     private Integer id;
 
-    @Attribute
+    @Attribute(name="weight")
     private Integer weight;
 
-    @Attribute
+    @Attribute(name="name")
     private String name;
 
+    public Ingredient()
+    {
+
+    }
 
     public Ingredient(String name, Integer weight) {
         this.weight = weight;

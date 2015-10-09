@@ -18,7 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import es.victorgf87.diets.classes.DrankWaterGlass;
-import es.victorgf87.diets.classes.ExerciseActivity;
+import es.victorgf87.diets.classes.exerciseactivities.ExerciseActivity;
 import es.victorgf87.diets.storers.StorerFactory;
 
 public class MainActivity extends AppCompatActivity

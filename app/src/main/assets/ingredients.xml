@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Ingredients>
+    <Ingredient id="1" name="Leche semidescremada(Vaca)" weight="250"/>
+    <Ingredient id="2" name="Cereales" weight="60"/>
+    <Ingredient id="3" name="Manzana" weight="200"/>
+
+
+    <Ingredient id="4" name="Alubias " weight="200" glasses="1"/>
+    <Ingredient id="5" name="Patata pequeña" weight="125"/>
+    <Ingredient id="6" name="Cebolla media mediana" weight="75"/>
+
+    <Ingredient id="7" name="Zanahoria pequeña" weight="40"/>
+
+    <Ingredient id="8" name="Chorizo, un trocito" weight="40"/>
+    <Ingredient id="9" name="Ajos 3 dientes" weight="15"/>
+
+
+    <Ingredient id="10" name="Perejil, un ramito o en polvo" weight="2"/>
+
+    <Ingredient id="11" name="Laurel una hojita" weight="2"/>
+    <Ingredient id="12" name="Sal, un poco" weight="2"/>
+
+
+
+    <Ingredient id="13" name="Agua 3 vasos hasta el borde" weight="550"/>
+    <Ingredient id="14" name="Pimentón al gusto" weight="-1"/>
+    <Ingredient id="15" name="Berenjena pequeña" weight="200"/>
+
+    <Ingredient id="16" name="Aceite, humedecer sartén" weight="5"/>
+
+    <Ingredient id="17" name="Huevos dos pequeños" weight="100"/>
+
+    <Ingredient id="18" name="Queso ligero la asturiana en lonchas, una loncha" weight="20"/>
+    <Ingredient id="19" name="Agua 2 vasos hasta el borde" weight="200"/>
+
+    <Ingredient id="20" name="Judia verde" weight="500"/>
+    <Ingredient id="21" name="Patata pequeña 100gr" weight="100"/>
+
+    <Ingredient id="22" name="Cebolla media pequeña" weight="50"/>
+
+
+
+    <Ingredient id="23" name="Tomate salsa con sal un vaso" weight="200" glasses="1"/>
+    <Ingredient id="24" name="Pimentón una cucharadita" weight="5"/>
+    <Ingredient id="25" name="Aceite de oliva una cucharada" weight="10"/>
+
+
+
+
+
+    <Ingredient id="26" name="Pimienta al gusto" weight="-1"/>
+    <Ingredient id="27" name="Bistec magro de vacuno" weight="150"/>
+    <Ingredient id="28" name="Sal gruesa un poco" weight="-1"/>
+    <Ingredient id="29" name="Chorrito de vinagre" weight="-1"/>
+
+
+
+
+
+
+
+    <Ingredient id="30" name="Salmon una porción" weight="200"/>
+    <Ingredient id="31" name="Lechuga 3 hojas" weight="90"/>
+
+    <Ingredient id="32" name="Pimiento rojo, medio pimiento" weight="125"/>
+
+    <Ingredient id="33" name="Naranja, media" weight="100"/>
+
+    <Ingredient id="34" name="Mostaza, una cucharadita" weight="10"/>
+    <Ingredient id="35" name="Aceite, una cucharadita" weight="5"/>
+
+
+
+
+
+
+
+
+    <Ingredient id="36" name="Tomillo un poquillo" weight="2"/>
+
+    <Ingredient id="37" name="Pimienta, un poco" weight="2"/>
+    <Ingredient id="38" name="Limón, una cucharada de zumo" weight="10"/>
+    <Ingredient id="39" name="Jamón cocido fiambre Carrefour, una loncha" weight="35"/>
+    <Ingredient id="40" name="Macarrones un vaso" weight="70" glasses="1"/>
+    <Ingredient id="41" name="Atun, una latita" weight="60"/>
+    <Ingredient id="42" name="Lechuga, dos hojas" weight="60"/>
+
+
+    <Ingredient id="43" name="Piña en rodajas en su jugo de Carrefour, 2 rodajas pequeñas o una grande" weight="70"/>
+    <Ingredient id="44" name="Mayonesa light dos cucharaditas" weight="28"/>
+
+
+    <Ingredient id="45" name="Tomate frito, una cucharada" weight="20"/>
+    <Ingredient id="46" name="Tomate natural mediano" weight="150"/>
+    <Ingredient id="47" name="Champiñones lata de 400g" weight="230"/>
+    <Ingredient id="48" name="Ajo dos dientes" weight="10"/>
+
+
+
+    <Ingredient id="49" name="Limón, zumo de medio limón" weight="25"/>
+    <Ingredient id="50" name="Pollo en filetes pechuga de pollo" weight="150"/>
+
+    <Ingredient id="51" name="Cebolla un cuarto de cebolla pequeña" weight="25"/>
+
+
+
+
+
+    <Ingredient id="52" name="Perejil 3 gramos" weight="3"/>
+    <Ingredient id="53" name="Pimientos verdes, un cuarto de pimiento grande" weight="65"/>
+
+    <Ingredient id="54" name="Agua necesaria para cocer" weight="-1"/>
+    <Ingredient id="55" name="Garbanzos 3 cucharadas soperas" weight="60"/>
+    <Ingredient id="56" name="Tomate natural uno pequeño" weight="100"/>
+
+    <Ingredient id="57" name="Atún claro al natural carrefour" weight="80"/>
+
+
+    <Ingredient id="58" name="Angulas Pescanova" weight="50"/>
+
+    <Ingredient id="59" name="Pimientos verdes, medio de tipo italiano" weight="65"/>
+
+    <Ingredient id="60" name="Ajo, un diente" weight="5"/>
+
+
+    <Ingredient id="61" name="Patata mediana" weight="170"/>
+
+    <Ingredient id="62" name="Zanahoria, media zanahoria mediana" weight="40"/>
+
+
+    <Ingredient id="63" name="Cerdo filetes de lomo" weight="150"/>
+
+    <Ingredient id="64" name="Lentejas, medio vaso" weight="100" glasses="0.5"/>
+
+    <Ingredient id="65" name="Patata media pequeña" weight="50"/>
+    <Ingredient id="66" name="Chorizo trozo tamaño de nuez" weight="25"/>
+
+    <Ingredient id="67" name="Orégano un poco" weight="2"/>
+
+    <Ingredient id="68" name="Pimiento verde, medio" weight="125"/>
+
+    <Ingredient id="69" name="Champiñones ocho medianos" weight="100"/>
+
+    <Ingredient id="70" name="Orégano 4 gramos" weight="4"/>
+
+    <Ingredient id="71" name="Pollo pechuga troceada" weight="150"/>
+
+    <Ingredient id="72" name="Yogur desnatado" weight="125"/>
+
+    <Ingredient id="73" name="Calamar, pota, gambas..." weight="100"/>
+
+    <Ingredient id="74" name="Agua un vaso" weight="100"/>
+
+    <Ingredient id="75" name="Arroz 4 cucharadas soperas" weight="80"/>
+
+    <Ingredient id="76" name="Agua 2 cucharadas" weight="20"/>
+
+
+    <Ingredient id="77" name="Pimentón media cucharada" weight="3"/>
+    <Ingredient id="78" name="Vinagre una cucharada" weight="10"/>
+    <Ingredient id="79" name="Repollo" weight="400"/>
+
+
+    <Ingredient id="80" name="Vaso de zumo de frutas" glasses="1" weight="-1"/>
+    <Ingredient id="81" name="Kiwis 2" weight="-1"/>
+    <Ingredient id="82" name="Melón" weight="300"/>
+    <Ingredient id="83" name="Pera mediana" weight="150"/>
+    <Ingredient id="84" name="Sandía" weight="300"/>
+    <!--Naranja-->
+    <Ingredient id="85" name="Fresas" weight="200"/>
+    <Ingredient id="86" name="Frambuesas" weight="200"/>
+    <Ingredient id="87" name="Mandarinas 2" weight="-1"/>
+    <Ingredient id="88" name="Melocotón" weight="150"/>
+    <Ingredient id="89" name="Cerezas" weight="100"/>
+    <Ingredient id="90" name="Piña natural 2 rodajas grandes o 4 pequeñas" weight="140"/>
+    <Ingredient id="91" name="Pomelo" weight="250"/>
+    <Ingredient id="92" name="Nectarina pequeña" weight="100"/>
+    <Ingredient id="93" name="Ciruelas 2" weight="150"/>
+
+
+    <Ingredient id="94" name="Piña en rodajas en su jugo de Carrefour, 2 rodajas grandes o 4 pequeñas" weight="140"/>
+    <Ingredient id="95" name="Huevo cocido opcional" weight="60"/>
+
+
+</Ingredients>
+
