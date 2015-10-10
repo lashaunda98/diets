@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Víctor on 27/09/2015.
  */
 @Root(name="Recipe", strict = false)
-public class Recipe
+public class Recipe implements Comparable<Recipe>
 {
     @Attribute
     private Integer id;
@@ -82,6 +82,31 @@ public class Recipe
 
     public Integer getPeople() {
         return people;
+    }
+
+    @Override
+    public int compareTo(Recipe another) {
+        return name.compareTo(another.name);
+    }
+
+    public String ingredientsToString()
+    {
+        StringBuilder sb=new StringBuilder();
+        for(Ingredient ingredient:ingredients)
+        {
+            sb.append(ingredient.toString());
+        }
+        return sb.toString();
+    }
+
+    public List<String> ingredientsToStringList()
+    {
+        List<String>ret=new ArrayList<>();
+        for(Ingredient ingredient:ingredients)
+        {
+            ret.add(ingredient.toString());
+        }
+        return ret;
     }
 }
 

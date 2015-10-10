@@ -18,6 +18,12 @@ public class Ingredient
     @Attribute(name="name",required=false)
     private String name;
 
+
+    @Override
+    public String toString() {
+        return ""+name+" "+weight+"g";
+    }
+
     public Ingredient()
     {
 

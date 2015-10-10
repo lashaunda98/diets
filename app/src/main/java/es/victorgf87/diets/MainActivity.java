@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity
         String textBefore=getDayMonthString(glassesCollection.get(0).getDate());
 
         int count=0;
+        ArrayList<Integer>newNumber=new ArrayList<>();
         for(DrankWaterGlass glass:glassesCollection)
         {
             String currentText=getDayMonthString(glass.getDate());
@@ -65,22 +66,31 @@ public class MainActivity extends AppCompatActivity
             }
             else {
                 bottomTexts.add(textBefore);
-                ArrayList<Integer>newNumber=new ArrayList<>();
+
                 newNumber.add(count);
-                dataList.add(newNumber);
+                //dataList.add(newNumber);
                 count=0;
             }
             textBefore=currentText;
         }
 
         bottomTexts.add(textBefore);
-        ArrayList<Integer>newNumber=new ArrayList<>();
+
+
         newNumber.add(count);
+
+
+        ArrayList<Integer>constants=new ArrayList<>();
+        for(Integer in:newNumber)
+        {
+            constants.add(8);
+        }
+        dataList.add(constants);
         dataList.add(newNumber);
 
 
 
-        lineViewGlassesChart.setDrawDotLine(false); //optional
+        lineViewGlassesChart.setDrawDotLine(true); //optional
         lineViewGlassesChart.setShowPopup(LineView.SHOW_POPUPS_All); //optional
         lineViewGlassesChart.setBottomTextList(bottomTexts);
         lineViewGlassesChart.setDataList(dataList);
@@ -117,7 +127,7 @@ public class MainActivity extends AppCompatActivity
 
         List<ExerciseActivity> activities= StorerFactory.create(this).getActivitiesList();
 
-        
+
 
     }
 

@@ -1,15 +1,20 @@
 package es.victorgf87.diets;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.Bind;
@@ -36,8 +41,9 @@ public class ShowRecipesActivity extends AppCompatActivity
         }
 
         @Override
-        public Object getItem(int position) {
-            return null;
+        public Recipe getItem(int position)
+        {
+            return recipes.get(position);
         }
 
         @Override
@@ -48,11 +54,17 @@ public class ShowRecipesActivity extends AppCompatActivity
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
+            LinearLayout ll=new LinearLayout(ShowRecipesActivity.this);
+            ll.setPadding(0, 50, 0, 50);
+
             TextView txt=new TextView(ShowRecipesActivity.this);
             txt.setText(recipes.get(position).getName());
-            return txt;
+            ll.addView(txt);
+
+            return ll;
         }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +72,33 @@ public class ShowRecipesActivity extends AppCompatActivity
         setContentView(R.layout.activity_show_recipes);
         ButterKnife.bind(this);
         List<Recipe>recipes=StorerFactory.create(this).getAllRecipes();
+        Collections.sort(recipes);
         list.setAdapter(new Adapt(recipes));
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Recipe recipe=((Adapt)list.getAdapter()).getItem(position);
+                Dialog dialog=new Dialog(ShowRecipesActivity.this);
+                dialog.setContentView(R.layout.detailed_recipe_layout);
+                TextView txtDialogTitle=ButterKnife.findById(dialog, R.id.detailed_recipe_layout_txtTitle);
+                TextView txtDialogElaboration=ButterKnife.findById(dialog,R.id.detailed_recipe_layout_txtElaboration);
+                ListView listViewDialogIngredients=ButterKnife.findById(dialog,R.id.detailed_recipe_layout_ingredientsList);
+                List<String>ingredientsList=recipe.ingredientsToStringList();
+                //TextView txtDialogIngredients=ButterKnife.findById(dialog,R.id.detailed_recipe_layout_txtIngredients);
+                ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(ShowRecipesActivity.this,android.R.layout.simple_list_item_1,ingredientsList);
+
+                txtDialogTitle.setText(recipe.getName());
+                txtDialogElaboration.setText(recipe.getElaboration());
+                listViewDialogIngredients.setAdapter(arrayAdapter);
+
+
+
+                dialog.show();
+                int a=3;
+                int b=a;
+            }
+        });
     }
 
     @Override

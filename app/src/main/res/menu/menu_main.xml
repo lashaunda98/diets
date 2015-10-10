@@ -8,7 +8,7 @@
           app:showAsAction="never"/>
 
       <item android:id="@+id/menu_main_action_go_recipeList"
-            android:title="@string/weights"
+            android:title="@string/recipes"
             android:orderInCategory="100"
             app:showAsAction="never"/>
 </menu>
