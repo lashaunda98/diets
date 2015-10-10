@@ -12,10 +12,10 @@ public class Ingredient
     @Attribute(name="id")
     private Integer id;
 
-    @Attribute(name="weight")
+    @Attribute(name="weight",required=false)
     private Integer weight;
 
-    @Attribute(name="name")
+    @Attribute(name="name",required=false)
     private String name;
 
     public Ingredient()

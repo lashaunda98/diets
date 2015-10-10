@@ -1,5 +1,6 @@
 package es.victorgf87.diets.classes.recipes;
 
+import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
@@ -12,8 +13,13 @@ import java.util.List;
 @Root(name="Recipe", strict = false)
 public class Recipe
 {
+    @Attribute
     private Integer id;
-    private String name, elaboration;
+    @Attribute
+    private String name;
+    @Attribute
+    private String elaboration;
+    @Attribute
     private Integer people;
 
     @ElementList(entry="Ingredient",inline = true)
@@ -69,6 +75,9 @@ public class Recipe
 
     public String getName() {
         return name;
+    }
+
+    public Recipe() {
     }
 
     public Integer getPeople() {

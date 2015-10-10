@@ -9,4 +9,7 @@
     <string name="action_settings">Settings</string>
     <string name="add_glass">Vaso bebido</string>
     <string name="glasses_per_day">Vasos bebidos por día</string>
+    <string name="title_activity_show_recipes">ShowRecipesActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

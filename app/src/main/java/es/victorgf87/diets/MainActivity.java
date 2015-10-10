@@ -85,22 +85,11 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         paintGlassesChart();
-        try {
-            bla();
-        }
-        catch(Exception e)
-        {
-            int a=3;
-            int b=a;
-        }
-    }
-
-
-
-    private void bla()
-    {
 
     }
+
+
+
 
     private String getDayMonthString(Date date)
     {
@@ -141,6 +130,10 @@ public class MainActivity extends AppCompatActivity
         {
             case R.id.menu_main_action_go_weights:
                 changeActivity(WeightsActivity.class);
+                return true;
+
+            case R.id.menu_main_action_go_recipeList:
+                changeActivity(ShowRecipesActivity.class);
                 return true;
         }
 
