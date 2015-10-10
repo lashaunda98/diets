@@ -9,6 +9,7 @@
                 tools:context="es.victorgf87.diets.ShowRecipesActivity">
 
 
+
     <ListView
         android:id="@+id/activity_show_recipes_listViewRecipes"
         android:layout_width="wrap_content"
