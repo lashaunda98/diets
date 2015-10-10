@@ -10,6 +10,7 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "WOLFRAM_API_KEY", "\"AU78TE-JUAERLGX8P\""
     }
     buildTypes {
         release {
@@ -25,10 +26,8 @@ configurations{
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-
-
-    compile('com.android.support:appcompat-v7:22.2.0')
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:cardview-v7:21.0.+'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
@@ -37,11 +36,12 @@ dependencies {
     androidTestCompile 'junit:junit:4.10'
     testCompile 'org.robolectric:robolectric:3.0'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.github.HackPlan:AndroidCharts:195635f8ee' //Charts -> https://github.com/HackPlan/AndroidCharts
+    compile 'com.github.HackPlan:AndroidCharts:195635f8ee'
+    //Charts -> https://github.com/HackPlan/AndroidCharts
     compile 'io.reactivex:rxandroid:0.23.0'
-
-    compile ("org.simpleframework:simple-xml:2.7.1"){
+    compile('org.simpleframework:simple-xml:2.7.1') {
 //APPcompat, maintains compatibility with older SO versions.
         exclude module: 'support-v4'
     }
+    compile files('libs/WolframAlpha-1.1.jar')
 }
