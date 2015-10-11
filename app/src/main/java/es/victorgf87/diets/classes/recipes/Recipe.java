@@ -13,17 +13,25 @@ import java.util.List;
 @Root(name="Recipe", strict = false)
 public class Recipe implements Comparable<Recipe>
 {
-    @Attribute
+    @Attribute(required = false)
     private Integer id;
-    @Attribute
+    @Attribute(required = false)
     private String name;
-    @Attribute
+    @Attribute(required = false)
     private String elaboration;
-    @Attribute
+    @Attribute(required = false)
     private Integer people;
 
-    @ElementList(entry="Ingredient",inline = true)
+    @ElementList(entry="Ingredient",inline = true,required = false)
     private List<Ingredient> ingredients;
+
+    public Recipe(Integer id, String name, String elaboration, Integer people, List<Ingredient> ingredients) {
+        this.id=id;
+        this.name=name;
+        this.elaboration=elaboration;
+        this.people=people;
+        this.ingredients=ingredients;
+    }
 
     public Recipe(String elaboration, Integer id, String name, Integer people) {
         ingredients=new ArrayList<>();

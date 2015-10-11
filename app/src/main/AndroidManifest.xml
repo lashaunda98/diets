@@ -29,7 +29,8 @@
         </activity>
         <activity
             android:name=".ShowRecipesActivity"
-            android:label="@string/title_activity_show_recipes" >
+            android:label="@string/title_activity_show_recipes"
+            android:parentActivityName=".MainActivity">
         </activity>
     </application>
 

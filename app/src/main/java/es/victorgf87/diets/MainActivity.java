@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
@@ -27,7 +26,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import es.victorgf87.diets.classes.DrankWaterGlass;
-import es.victorgf87.diets.classes.exerciseactivities.ExerciseActivity;
+import es.victorgf87.diets.classes.recipes.Recipe;
 import es.victorgf87.diets.storers.StorerFactory;
 
 public class MainActivity extends AppCompatActivity
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        paintGlassesChart();
+        //paintGlassesChart();
 
     }
 
@@ -125,8 +124,14 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        List<ExerciseActivity> activities= StorerFactory.create(this).getActivitiesList();
-
+        List<Recipe> recipes=StorerFactory.create(this).getAllRecipes();
+        int a=3;
+        int b=a;
+        //((DBStorer)StorerFactory.create(this)).getReadableDatabase().close();
+        //List<ExerciseActivity> activities= StorerFactory.create(this).getActivitiesList();
+        //List<Menu> menus=StorerFactory.create(this).getAllMenus();
+        //int a=3;
+        //int b=a;
 
 
     }
@@ -138,19 +143,19 @@ public class MainActivity extends AppCompatActivity
         HandlerThread thread=new HandlerThread("name");
         thread.start();
         Handler handler=new Handler(thread.getLooper());
-        handler.post(new Runnable(){
+        handler.post(new Runnable() {
 
             @Override
             public void run() {
                 String wolfram_api_key=BuildConfig.WOLFRAM_API_KEY;
-                String input = "falafel";
+                String input="falafel";
                 // The WAEngine is a factory for creating WAQuery objects,
                 // and it also used to perform those queries. You can set properties of
                 // the WAEngine (such as the desired API output format types) that will
                 // be inherited by all WAQuery objects created from it. Most applications
                 // will only need to crete one WAEngine object, which is used throughout
                 // the life of the application.
-                WAEngine engine = new WAEngine();
+                WAEngine engine=new WAEngine();
 
                 // These properties will be set in all the WAQuery objects created from this WAEngine.
                 engine.setAppID(wolfram_api_key);
@@ -158,7 +163,7 @@ public class MainActivity extends AppCompatActivity
 
 
                 // Create the query.
-                WAQuery query = engine.createQuery();
+                WAQuery query=engine.createQuery();
 
                 // Set properties of the query.
                 query.setInput(input);
@@ -171,12 +176,12 @@ public class MainActivity extends AppCompatActivity
 
                     // This sends the URL to the Wolfram|Alpha server, gets the XML result
                     // and parses it into an object hierarchy held by the WAQueryResult object.
-                    WAQueryResult queryResult = engine.performQuery(query);
+                    WAQueryResult queryResult=engine.performQuery(query);
 
                     if (queryResult.isError()) {
                         System.out.println("Query error");
-                        System.out.println("  error code: " + queryResult.getErrorCode());
-                        System.out.println("  error message: " + queryResult.getErrorMessage());
+                        System.out.println("  error code: "+queryResult.getErrorCode());
+                        System.out.println("  error message: "+queryResult.getErrorMessage());
                     } else if (!queryResult.isSuccess()) {
                         System.out.println("Query was not understood; no results available.");
                     } else {
@@ -208,11 +213,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
